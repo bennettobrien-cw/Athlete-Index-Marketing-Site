@@ -53,3 +53,19 @@ test("proof strip marks every unproven number as a placeholder", async ({
     await expect(stat).toHaveAttribute("data-placeholder", "true");
   }
 });
+
+test("'See how it works' jumps to three steps without hiding them under the header", async ({
+  page,
+}) => {
+  await page.goto("./");
+  await page.getByRole("link", { name: "See how it works" }).click();
+
+  const section = page.getByRole("region", { name: "How it works" });
+  const heading = section.getByRole("heading", { level: 2 });
+  await expect(heading).toBeInViewport();
+  const headerBottom = (await page.getByRole("banner").boundingBox())!;
+  expect((await heading.boundingBox())!.y).toBeGreaterThanOrEqual(
+    headerBottom.y + headerBottom.height,
+  );
+  await expect(section.getByRole("listitem")).toHaveCount(3);
+});

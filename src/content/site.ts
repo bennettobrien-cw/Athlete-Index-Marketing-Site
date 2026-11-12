@@ -69,6 +69,25 @@ export const proof = {
   ],
 };
 
+export const howItWorks = {
+  heading: "How it works",
+  intro: "Three steps. Most athletes finish the first one before practice.",
+  steps: [
+    {
+      title: "Build your profile",
+      body: "Add your sport, position, class and measurables. Link the film you already have.",
+    },
+    {
+      title: "Post your results",
+      body: "Share PRs, game stats and highlights as they happen. Verified results get a badge recruiters trust.",
+    },
+    {
+      title: "Get discovered",
+      body: "Recruiters search by class, position and numbers. Your profile puts you in those results.",
+    },
+  ],
+};
+
 export const sampleProfile = {
   label: "Sample athlete profile",
   badge: "Sample profile",
