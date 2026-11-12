@@ -62,3 +62,23 @@ test("opening a FAQ question records which one", async ({ page }) => {
     .poll(() => events)
     .toContainEqual(["faq_open", { props: { question: "How do I cancel?" } }]);
 });
+
+test("sending a form records which form was sent", async ({ page }) => {
+  const events = await recordAnalyticsEvents(page);
+  await page.clock.install();
+  await page.route("https://formspree.io/**", (route) =>
+    route.fulfill({ json: { ok: true } }),
+  );
+
+  await page.goto("contact/");
+  const form = page.getByRole("form", { name: "Contact us" });
+  await form.getByLabel("Name", { exact: true }).fill("Sam Rivera");
+  await form.getByLabel("Email", { exact: true }).fill("sam@example.com");
+  await form.getByLabel("Message", { exact: true }).fill("Hello");
+  await page.clock.fastForward(10_000);
+  await form.getByRole("button", { name: "Send message" }).click();
+
+  await expect
+    .poll(() => events)
+    .toContainEqual(["form_submit", { props: { form: "contact-form" } }]);
+});

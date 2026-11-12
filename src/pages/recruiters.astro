@@ -1,0 +1,71 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Form from "../components/Form.astro";
+import { config } from "../config";
+import { pages, recruitersPage } from "../content/site";
+
+const { why, form } = recruitersPage;
+---
+
+<BaseLayout {...pages.recruiters}>
+  <main>
+    <section class="mx-auto max-w-7xl px-4 pt-16 pb-16 sm:px-6 lg:pt-24">
+      <p class="text-accent text-sm font-bold tracking-widest uppercase">
+        {recruitersPage.eyebrow}
+      </p>
+      <h1 class="mt-4 max-w-4xl text-4xl leading-[0.95] sm:text-6xl">
+        {recruitersPage.heading}
+      </h1>
+      <p class="text-muted mt-6 max-w-2xl text-lg">{recruitersPage.intro}</p>
+      <a
+        href="#recruiter-form"
+        class="bg-accent text-ink hover:bg-accent-hover mt-8 inline-block rounded-md px-7 py-4 text-lg font-bold"
+      >
+        {form.heading}
+      </a>
+    </section>
+
+    <section
+      aria-labelledby="why-heading"
+      class="border-line bg-surface/40 border-y"
+    >
+      <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6">
+        <h2 id="why-heading" class="text-4xl sm:text-5xl">
+          {why.heading}
+        </h2>
+        <ul class="mt-10 grid gap-6 md:grid-cols-2">
+          {why.items.map((item) => (
+            <li class="border-line bg-surface rounded-2xl border p-6">
+              <h3 class="text-2xl">{item.title}</h3>
+              <p class="text-muted mt-2">{item.body}</p>
+            </li>
+          ))}
+        </ul>
+        <p data-testid="contact-rules-note" class="text-muted mt-8 max-w-3xl">
+          {recruitersPage.contactRules}
+        </p>
+      </div>
+    </section>
+
+    <section
+      aria-labelledby="recruiter-form-heading"
+      class="mx-auto grid max-w-7xl gap-12 px-4 py-20 sm:px-6 lg:grid-cols-[1fr_1.2fr]"
+    >
+      <div>
+        <h2 id="recruiter-form-heading" class="text-4xl sm:text-5xl">
+          {form.heading}
+        </h2>
+        <p class="text-muted mt-4 text-lg">{form.intro}</p>
+      </div>
+      <div class="border-line bg-surface rounded-2xl border p-6 sm:p-8">
+        <Form
+          id={form.id}
+          label={form.label}
+          submitLabel={form.submitLabel}
+          fields={form.fields}
+          endpoint={config.forms.recruiter}
+        />
+      </div>
+    </section>
+  </main>
+</BaseLayout>

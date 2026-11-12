@@ -23,6 +23,18 @@ export const pages = {
     description:
       "A safe, honest way to help your athlete get recruited. Prices on the page, parent-linked accounts, verified recruiters and no scholarship promises.",
   },
+  contact: {
+    path: "contact/",
+    title: "Contact | Athlete Index",
+    description:
+      "Questions about Athlete Index, your account or recruiter access? Send us a message and a real person on our team will get back to you.",
+  },
+  recruiters: {
+    path: "recruiters/",
+    title: "For Recruiters | Athlete Index",
+    description:
+      "Find athletes worth a second look, faster. Search by sport, class, position and verified numbers, with film tied to results. Request recruiter access.",
+  },
   pricing: {
     path: "pricing/",
     title: "Pricing | Athlete Index",
@@ -415,6 +427,176 @@ export const parentsPage = {
           "Yes. Most college roster spots are outside Division I. Athlete Index is built to help athletes find the right fit at every level.",
       },
     ],
+  },
+};
+
+export type FormField = {
+  name: string;
+  label: string;
+  type: "text" | "email" | "select" | "textarea";
+  autocomplete?: string;
+  options?: string[];
+  required: boolean;
+  error: string;
+};
+
+export const formMessages = {
+  success: "Thanks! Your message is on its way. We'll reply by email.",
+  failure:
+    "Something went wrong and your message wasn't sent. Please try again, or email us instead.",
+};
+
+export const contactPage = {
+  eyebrow: "Contact",
+  heading: "Talk to a real person",
+  intro:
+    "Questions about your account, billing or recruiter access? Send a message and we'll reply by email within [SUPPORT RESPONSE TIME].",
+  emailLabel: "Prefer email?",
+  email: "[CONTACT EMAIL]",
+  form: {
+    id: "contact-form",
+    label: "Contact us",
+    submitLabel: "Send message",
+    fields: [
+      {
+        name: "name",
+        label: "Name",
+        type: "text",
+        autocomplete: "name",
+        required: true,
+        error: "Enter your name.",
+      },
+      {
+        name: "email",
+        label: "Email",
+        type: "email",
+        autocomplete: "email",
+        required: true,
+        error: "Enter an email address like name@example.com.",
+      },
+      {
+        name: "role",
+        label: "I am a…",
+        type: "select",
+        options: [
+          "Athlete",
+          "Parent or guardian",
+          "Coach or trainer",
+          "College recruiter",
+          "Other",
+        ],
+        required: false,
+        error: "",
+      },
+      {
+        name: "message",
+        label: "Message",
+        type: "textarea",
+        required: true,
+        error: "Write a short message.",
+      },
+    ] as FormField[],
+  },
+};
+
+export const recruitersPage = {
+  eyebrow: "For recruiters",
+  heading: "Find athletes worth a second look. Faster.",
+  intro:
+    "Less noise, better signal. Search athletes by the numbers you actually recruit on, and see how each one was measured.",
+  why: {
+    heading: "Why recruiters use Athlete Index",
+    items: [
+      {
+        title: "Verified results",
+        body: "Every result says how it was measured: laser-timed at an event, confirmed by a coach, or self-reported.",
+      },
+      {
+        title: "Filters that match your board",
+        body: "Search by sport, class, position, measurables and location. Save searches and build shortlists.",
+      },
+      {
+        title: "Short film, tied to the numbers",
+        body: "Highlights sit next to the results they prove, best plays first.",
+      },
+      {
+        title: "Coach endorsements",
+        body: "High school and club coaches can confirm results they timed, so you're not relying on claims alone.",
+      },
+    ],
+  },
+  contactRules:
+    "You stay in control of compliance. Athlete Index doesn't change when your association lets you contact a prospect, so follow your own recruiting calendar.",
+  form: {
+    id: "recruiter-form",
+    label: "Request recruiter access",
+    heading: "Request recruiter access",
+    intro:
+      "We verify every recruiter before turning on access. Use your school or program email so we can confirm it quickly.",
+    submitLabel: "Request access",
+    fields: [
+      {
+        name: "name",
+        label: "Name",
+        type: "text",
+        autocomplete: "name",
+        required: true,
+        error: "Enter your name.",
+      },
+      {
+        name: "email",
+        label: "Work email",
+        type: "email",
+        autocomplete: "email",
+        required: true,
+        error: "Enter your school or program email.",
+      },
+      {
+        name: "school",
+        label: "School or program",
+        type: "text",
+        autocomplete: "organization",
+        required: true,
+        error: "Enter your school or program.",
+      },
+      {
+        name: "role",
+        label: "Role",
+        type: "select",
+        options: [
+          "Head coach",
+          "Assistant coach",
+          "Recruiting coordinator",
+          "Scout",
+          "Other",
+        ],
+        required: true,
+        error: "Choose your role.",
+      },
+      {
+        name: "sport",
+        label: "Sport",
+        type: "select",
+        options: ["Football", "Basketball", "Baseball", "Softball"],
+        required: true,
+        error: "Choose your sport.",
+      },
+      {
+        name: "division",
+        label: "Division",
+        type: "select",
+        options: [
+          "NCAA D1",
+          "NCAA D2",
+          "NCAA D3",
+          "NAIA",
+          "NJCAA / JUCO",
+          "Other",
+        ],
+        required: true,
+        error: "Choose your division.",
+      },
+    ] as FormField[],
   },
 };
 
