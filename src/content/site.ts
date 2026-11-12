@@ -47,6 +47,28 @@ export const hero = {
   },
 };
 
+export const proof = {
+  show: true,
+  note: "Placeholder numbers. Replace with real, verifiable counts before launch.",
+  stats: [
+    {
+      value: "[STAT: athletes]",
+      label: "athletes building profiles",
+      placeholder: true,
+    },
+    {
+      value: "[STAT: results posted]",
+      label: "results posted",
+      placeholder: true,
+    },
+    {
+      value: "[STAT: recruiters]",
+      label: "verified recruiters searching",
+      placeholder: true,
+    },
+  ],
+};
+
 export const sampleProfile = {
   label: "Sample athlete profile",
   badge: "Sample profile",

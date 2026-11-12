@@ -39,3 +39,17 @@ test("hero shows a sample profile with verified and self-reported results", asyn
   ).toBeVisible();
   await expect(profile.getByTestId("highlight-video")).toBeVisible();
 });
+
+test("proof strip marks every unproven number as a placeholder", async ({
+  page,
+}) => {
+  await page.goto("./");
+  const proof = page.getByTestId("proof-strip");
+
+  await expect(proof.getByTestId("placeholder-note")).toBeVisible();
+  const stats = proof.getByTestId("proof-stat");
+  await expect(stats).toHaveCount(3);
+  for (const stat of await stats.all()) {
+    await expect(stat).toHaveAttribute("data-placeholder", "true");
+  }
+});
