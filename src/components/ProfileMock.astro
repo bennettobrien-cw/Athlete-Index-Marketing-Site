@@ -106,6 +106,7 @@ const format = (value: number, decimals: number) => value.toFixed(decimals);
     const target = Number(counter.dataset.countTo);
     const decimals = Number(counter.dataset.decimals);
     const start = performance.now();
+    counter.textContent = (0).toFixed(decimals);
 
     function tick(now: number) {
       const progress = Math.min(Math.max((now - start) / durationMs, 0), 1);
