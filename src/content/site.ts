@@ -23,6 +23,10 @@ export const pages = {
   },
 };
 
+export const hero = {
+  headline: "Get seen. Get recruited.",
+};
+
 export const cta = {
   primary: "Start free trial",
 };

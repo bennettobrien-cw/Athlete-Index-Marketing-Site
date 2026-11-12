@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { pages, product } from "../content/site";
+import { hero, pages, product } from "../content/site";
 import { config } from "../config";
 
 const structuredData = {
@@ -31,4 +31,7 @@ const structuredData = {
     type="application/ld+json"
     set:html={JSON.stringify(structuredData)}
   />
+  <main>
+    <h1>{hero.headline}</h1>
+  </main>
 </BaseLayout>
