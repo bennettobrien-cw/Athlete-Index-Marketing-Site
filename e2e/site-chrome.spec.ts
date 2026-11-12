@@ -51,3 +51,29 @@ test("on a phone the nav opens from a menu button and closes with Escape", async
   await expect(mobileNav).toBeHidden();
   await expect(menuButton).toBeFocused();
 });
+
+test("footer links to every page, the legal drafts and says we are not the NCAA", async ({
+  page,
+}) => {
+  await page.goto("./");
+  const footer = page.getByRole("contentinfo");
+
+  for (const [name, path] of [
+    ["Features", "features/"],
+    ["Pricing", "pricing/"],
+    ["Parents", "parents/"],
+    ["Recruiters", "recruiters/"],
+    ["About", "about/"],
+    ["Contact", "contact/"],
+    ["Privacy Policy", "privacy/"],
+    ["Terms of Service", "terms/"],
+  ]) {
+    await expect(
+      footer.getByRole("link", { name, exact: true }),
+    ).toHaveAttribute("href", new URL(path, config.siteUrl).pathname);
+  }
+  await expect(footer.getByTestId("ncaa-disclaimer")).toBeVisible();
+  await expect(footer.getByTestId("copyright")).toContainText(
+    String(new Date().getFullYear()),
+  );
+});
