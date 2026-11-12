@@ -33,11 +33,10 @@ const href =
       testId="price-monthly"
       class:list={[
         "flex",
-        "annual" in plan &&
-          "group-has-[#billing-annual:checked]/billing:hidden",
+        plan.annual && "group-has-[#billing-annual:checked]/billing:hidden",
       ]}
     />
-    {"annual" in plan && (
+    {plan.annual && (
       <PriceTag
         price={plan.annual.price}
         period={plan.annual.period}
