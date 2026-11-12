@@ -125,3 +125,38 @@ test("no page scrolls sideways or cuts off content at any breakpoint", async ({
     }
   }
 });
+
+test("no page jumps around while slow fonts arrive", async ({
+  page,
+  request,
+  baseURL,
+}) => {
+  await page.setViewportSize({ width: 375, height: 800 });
+  await page.route("**/*.woff2", async (route) => {
+    await new Promise((resolve) => setTimeout(resolve, 400));
+    await route.continue();
+  });
+  await page.addInitScript(() => {
+    const shifts = { total: 0 };
+    (window as unknown as { layoutShift: typeof shifts }).layoutShift = shifts;
+    new PerformanceObserver((list) => {
+      for (const entry of list.getEntries() as unknown as {
+        value: number;
+        hadRecentInput: boolean;
+      }[]) {
+        if (!entry.hadRecentInput) shifts.total += entry.value;
+      }
+    }).observe({ type: "layout-shift", buffered: true });
+  });
+
+  for (const path of await everyPagePath(request, baseURL!)) {
+    await page.goto(path);
+    await page.waitForTimeout(1000);
+    const shift = await page.evaluate(
+      () =>
+        (window as unknown as { layoutShift: { total: number } }).layoutShift
+          .total,
+    );
+    expect(shift, path).toBeLessThan(0.1);
+  }
+});
