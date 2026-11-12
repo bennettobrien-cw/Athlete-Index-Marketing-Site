@@ -88,6 +88,123 @@ export const howItWorks = {
   ],
 };
 
+export const features = {
+  heading: "Built for getting recruited",
+  intro:
+    "Everything a coach needs to say yes to a second look, in one place you control.",
+  linkLabel: "See every feature",
+  items: [
+    {
+      id: "profiles",
+      kicker: "Profiles & measurables",
+      title: "Your profile, built in minutes",
+      body: "Sport, position, class, height, weight and the numbers coaches filter by. One link you can drop in every email and bio.",
+      points: [
+        "The measurables coaches actually search",
+        "Grades and test scores, only if you choose to share them",
+        "One link that always shows your latest",
+      ],
+    },
+    {
+      id: "results",
+      kicker: "Performance posts & PRs",
+      title: "Every PR, on the record",
+      body: "Post a new 40 time, a career high or a personal best the day it happens. Each result says whether it was verified or self-reported, so coaches know what they're looking at.",
+      points: [
+        "Verified results get a badge and a source",
+        "Your progress shows up as a timeline",
+        "Updates keep your profile fresh",
+      ],
+    },
+    {
+      id: "highlights",
+      kicker: "Highlight videos",
+      title: "Film that gets watched",
+      body: "Upload highlights or link the film you already have. Put your best plays first, because coaches decide fast.",
+      points: [
+        "Upload clips or link existing film",
+        "Pin your best reel to the top",
+        "Plays tied to the results they prove",
+      ],
+    },
+    {
+      id: "discovery",
+      kicker: "Search & discovery",
+      title: "Show up when recruiters search",
+      body: "Recruiters filter by sport, class, position and numbers. You can search too: teams, recruiters and events.",
+      points: [
+        "Found by class, position and measurables",
+        "Search teams, recruiters and events",
+        "Visibility settings you control",
+      ],
+    },
+    {
+      id: "ai",
+      kicker: "AI Assistant",
+      title: "A recruiting assistant that's always on",
+      body: "Get help writing coach emails, planning your next showcase and understanding contact rules. It's AI, so double-check anything that matters.",
+      points: [
+        "Drafts emails to coaches in your voice",
+        "Plans camps, showcases and next steps",
+        "Explains recruiting rules in plain words",
+      ],
+      aiLabel: "AI",
+    },
+  ],
+};
+
+export const audiences = {
+  heading: "Who it's for",
+  intro:
+    "One platform, built around the four people in every recruiting story.",
+  tabs: [
+    {
+      id: "athletes",
+      label: "Athletes",
+      headline: "Get on the radar of coaches at every level",
+      points: [
+        "A profile that looks pro on day one",
+        "Results and film coaches can trust",
+        "Know your next move with the AI Assistant",
+      ],
+      cta: { label: "Start free trial", to: "signup" },
+    },
+    {
+      id: "parents",
+      label: "Parents",
+      headline: "Help your athlete get seen, safely and honestly",
+      points: [
+        "Price shown up front. No sales calls. Cancel in one click.",
+        "A parent-linked account and control over who sees what",
+        "Verified recruiters only, and no scholarship promises",
+      ],
+      cta: { label: "Start free trial", to: "signup" },
+    },
+    {
+      id: "coaches",
+      label: "Coaches",
+      headline: "Showcase your athletes and back their numbers",
+      points: [
+        "Confirm the results you timed yourself",
+        "Point college coaches to one profile per athlete",
+        "Works alongside the film tools you already use",
+      ],
+      cta: { label: "Start free trial", to: "signup" },
+    },
+    {
+      id: "recruiters",
+      label: "Recruiters",
+      headline: "Find athletes worth a second look, faster",
+      points: [
+        "Filter by sport, class, position and verified numbers",
+        "Short film tied to the results it proves",
+        "Coach-confirmed results, not just self-reported claims",
+      ],
+      cta: { label: "Request recruiter access", to: "recruiters/" },
+    },
+  ],
+};
+
 export const sampleProfile = {
   label: "Sample athlete profile",
   badge: "Sample profile",
