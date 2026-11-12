@@ -27,6 +27,37 @@ export const hero = {
   headline: "Get seen. Get recruited.",
 };
 
+export const nav = [
+  { label: "Features", path: "features/" },
+  { label: "Pricing", path: "pricing/" },
+  { label: "Parents", path: "parents/" },
+  { label: "Recruiters", path: "recruiters/" },
+];
+
+export const footer = {
+  tagline:
+    "Your numbers, your film, your story. In one place where recruiters look.",
+  groups: [
+    { heading: "Product", links: nav },
+    {
+      heading: "Company",
+      links: [
+        { label: "About", path: "about/" },
+        { label: "Contact", path: "contact/" },
+      ],
+    },
+    {
+      heading: "Legal",
+      links: [
+        { label: "Privacy Policy", path: "privacy/" },
+        { label: "Terms of Service", path: "terms/" },
+      ],
+    },
+  ],
+  disclaimer:
+    "Athlete Index is not affiliated with or endorsed by the NCAA, NAIA or NJCAA. No service can guarantee recruitment or a scholarship, and neither do we.",
+};
+
 export const cta = {
   primary: "Start free trial",
 };
