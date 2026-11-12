@@ -88,6 +88,71 @@ export const howItWorks = {
   ],
 };
 
+export const features = {
+  heading: "Built for getting recruited",
+  intro:
+    "Everything a coach needs to say yes to a second look, in one place you control.",
+  linkLabel: "See every feature",
+  items: [
+    {
+      id: "profiles",
+      kicker: "Profiles & measurables",
+      title: "Your profile, built in minutes",
+      body: "Sport, position, class, height, weight and the numbers coaches filter by. One link you can drop in every email and bio.",
+      points: [
+        "The measurables coaches actually search",
+        "Grades and test scores, only if you choose to share them",
+        "One link that always shows your latest",
+      ],
+    },
+    {
+      id: "results",
+      kicker: "Performance posts & PRs",
+      title: "Every PR, on the record",
+      body: "Post a new 40 time, a career high or a personal best the day it happens. Each result says whether it was verified or self-reported, so coaches know what they're looking at.",
+      points: [
+        "Verified results get a badge and a source",
+        "Your progress shows up as a timeline",
+        "Updates keep your profile fresh",
+      ],
+    },
+    {
+      id: "highlights",
+      kicker: "Highlight videos",
+      title: "Film that gets watched",
+      body: "Upload highlights or link the film you already have. Put your best plays first, because coaches decide fast.",
+      points: [
+        "Upload clips or link existing film",
+        "Pin your best reel to the top",
+        "Plays tied to the results they prove",
+      ],
+    },
+    {
+      id: "discovery",
+      kicker: "Search & discovery",
+      title: "Show up when recruiters search",
+      body: "Recruiters filter by sport, class, position and numbers. You can search too: teams, recruiters and events.",
+      points: [
+        "Found by class, position and measurables",
+        "Search teams, recruiters and events",
+        "Visibility settings you control",
+      ],
+    },
+    {
+      id: "ai",
+      kicker: "AI Assistant",
+      title: "A recruiting assistant that's always on",
+      body: "Get help writing coach emails, planning your next showcase and understanding contact rules. It's AI, so double-check anything that matters.",
+      points: [
+        "Drafts emails to coaches in your voice",
+        "Plans camps, showcases and next steps",
+        "Explains recruiting rules in plain words",
+      ],
+      aiLabel: "AI",
+    },
+  ],
+};
+
 export const sampleProfile = {
   label: "Sample athlete profile",
   badge: "Sample profile",
