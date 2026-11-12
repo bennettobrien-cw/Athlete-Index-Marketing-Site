@@ -100,3 +100,19 @@ test("a bot that fills the hidden honeypot is quietly ignored", async ({
   );
   expect(requests).toEqual([]);
 });
+
+test("a form submitted faster than a person could type is quietly ignored", async ({
+  page,
+}) => {
+  await page.clock.install();
+  const requests = await mockFormspree(page);
+  await page.goto("contact/");
+  const form = await fillContactForm(page);
+
+  await form.getByRole("button", { name: "Send message" }).click();
+
+  await expect(page.getByTestId("form-status")).toHaveText(
+    /your message is on its way/i,
+  );
+  expect(requests).toEqual([]);
+});

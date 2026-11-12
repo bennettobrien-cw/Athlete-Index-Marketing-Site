@@ -95,8 +95,13 @@ const fieldClass =
     const fields = [...form.querySelectorAll<HTMLInputElement>("[data-error]")];
     const status = form.querySelector<HTMLElement>("[role=status]")!;
 
+    const loadedAt = Date.now();
+    const fastestHumanMs = 3000;
+
     function looksLikeABot(data: FormData) {
-      return data.get("_gotcha") !== "";
+      return (
+        data.get("_gotcha") !== "" || Date.now() - loadedAt < fastestHumanMs
+      );
     }
 
     async function post(data: FormData) {
