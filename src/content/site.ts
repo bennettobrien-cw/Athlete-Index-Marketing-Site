@@ -23,8 +23,28 @@ export const pages = {
   },
 };
 
+export const pricing = {
+  trialLength: "[TRIAL LENGTH]",
+  athleteMonthly: "[PRICE]",
+};
+
+export const trialTerms = `${pricing.trialLength} free, then ${pricing.athleteMonthly}/mo. Cancel anytime in one click.`;
+
 export const hero = {
+  eyebrow: "Football · Basketball · Baseball & Softball",
   headline: "Get seen. Get recruited.",
+  subhead:
+    "Put your game where recruiters look: your measurables, PRs and film in one profile coaches can search.",
+  secondaryCta: "See how it works",
+  recruiterStrip: {
+    lead: "Recruiting?",
+    text: "Find verified athletes by class, position and numbers",
+  },
+  alternatives: {
+    headline: "Your numbers. Your film. In front of recruiters.",
+    subhead:
+      "Stop emailing stats into the void. Post your results once and let recruiters search for you.",
+  },
 };
 
 export const nav = [
