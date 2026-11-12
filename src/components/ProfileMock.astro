@@ -108,7 +108,7 @@ const format = (value: number, decimals: number) => value.toFixed(decimals);
     const start = performance.now();
 
     function tick(now: number) {
-      const progress = Math.min((now - start) / durationMs, 1);
+      const progress = Math.min(Math.max((now - start) / durationMs, 0), 1);
       counter.textContent = (target * easeOut(progress)).toFixed(decimals);
       if (progress < 1) requestAnimationFrame(tick);
     }
@@ -122,7 +122,9 @@ const format = (value: number, decimals: number) => value.toFixed(decimals);
       runStopwatch(entry.target as HTMLElement);
     }
   });
-  document
-    .querySelectorAll<HTMLElement>("[data-count-to]")
-    .forEach((counter) => observer.observe(counter));
+  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    document
+      .querySelectorAll<HTMLElement>("[data-count-to]")
+      .forEach((counter) => observer.observe(counter));
+  }
 </script>
