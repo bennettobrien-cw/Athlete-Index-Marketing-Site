@@ -1,6 +1,11 @@
 ---
 import { safety } from "../content/site";
 
+interface Props {
+  showLink?: boolean;
+}
+
+const { showLink = true } = Astro.props;
 const base = import.meta.env.BASE_URL;
 ---
 
@@ -24,13 +29,15 @@ const base = import.meta.env.BASE_URL;
       <p data-testid="min-age-policy" class="font-medium">
         {safety.minAgePolicy}
       </p>
-      <a
-        href={`${base}parents/`}
-        data-testid="parents-link"
-        class="text-accent-deep inline-flex items-center gap-2 py-2 font-bold whitespace-nowrap hover:underline"
-      >
-        {safety.parentsLink} <span aria-hidden="true">→</span>
-      </a>
+      {showLink && (
+        <a
+          href={`${base}parents/`}
+          data-testid="parents-link"
+          class="text-accent-deep inline-flex items-center gap-2 py-2 font-bold whitespace-nowrap hover:underline"
+        >
+          {safety.parentsLink} <span aria-hidden="true">→</span>
+        </a>
+      )}
     </div>
   </div>
 </section>

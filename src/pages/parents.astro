@@ -1,0 +1,96 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Safety from "../components/Safety.astro";
+import Faq from "../components/Faq.astro";
+import { config } from "../config";
+import { cta, pages, parentsPage, trialTerms } from "../content/site";
+
+const { cost, odds, faq } = parentsPage;
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout {...pages.parents}>
+  <main>
+    <section class="mx-auto max-w-7xl px-4 pt-16 pb-16 sm:px-6 lg:pt-24">
+      <p class="text-accent text-sm font-bold tracking-widest uppercase">
+        {parentsPage.eyebrow}
+      </p>
+      <h1 class="mt-4 max-w-4xl text-4xl leading-[0.95] sm:text-6xl">
+        {parentsPage.heading}
+      </h1>
+      <p class="text-muted mt-6 max-w-2xl text-lg">{parentsPage.intro}</p>
+      <div class="mt-8 flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4">
+        <a
+          href={config.signupUrl}
+          data-cta="parents"
+          class="bg-accent text-ink hover:bg-accent-hover rounded-md px-7 py-4 text-center text-lg font-bold"
+        >
+          {cta.primary}
+        </a>
+        <p class="text-muted text-sm">{trialTerms}</p>
+      </div>
+    </section>
+
+    <Safety showLink={false} />
+
+    <section
+      aria-labelledby="cost-heading"
+      class="mx-auto grid max-w-7xl gap-12 px-4 py-20 sm:px-6 lg:grid-cols-2 lg:py-28"
+    >
+      <div>
+        <h2 id="cost-heading" class="text-4xl sm:text-5xl">
+          {cost.heading}
+        </h2>
+        <p class="text-muted mt-4 text-lg">{cost.body}</p>
+        <a
+          href={`${base}pricing/`}
+          class="text-accent mt-6 inline-flex items-center gap-2 py-2 text-lg font-bold hover:underline"
+        >
+          {cost.linkLabel} <span aria-hidden="true">→</span>
+        </a>
+      </div>
+
+      <div>
+        <h2 class="text-4xl sm:text-5xl">{odds.heading}</h2>
+        <p class="text-muted mt-4 text-lg">{odds.intro}</p>
+        <table class="mt-8 w-full border-collapse text-left">
+          <caption class="mb-3 text-left font-bold">{odds.caption}</caption>
+          <thead>
+            <tr class="border-line border-b">
+              {odds.columns.map((column, index) => (
+                <th
+                  scope="col"
+                  class:list={["py-3 font-bold", index > 0 && "text-right"]}
+                >
+                  {column}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {odds.rows.map(([sport, any, divisionOne]) => (
+              <tr class="border-line border-b">
+                <th scope="row" class="py-3 font-medium">
+                  {sport}
+                </th>
+                <td class="py-3 text-right tabular-nums">{any}</td>
+                <td class="text-muted py-3 text-right tabular-nums">
+                  {divisionOne}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <a
+          href={odds.source.href}
+          data-testid="odds-source"
+          class="text-muted mt-3 inline-block py-1 text-sm underline hover:text-white"
+        >
+          {odds.source.label}
+        </a>
+      </div>
+    </section>
+
+    <Faq id="parents-faq" {...faq} />
+  </main>
+</BaseLayout>

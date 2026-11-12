@@ -33,6 +33,38 @@ test("every page meets WCAG 2.2 AA", async ({ page, request, baseURL }) => {
   }
 });
 
+test("every indexed page has its own title, description, canonical URL and one h1", async ({
+  page,
+  request,
+  baseURL,
+}) => {
+  const titles = new Set<string>();
+  const descriptions = new Set<string>();
+  const indexed = (await everyPagePath(request, baseURL!)).filter(
+    (path) => path !== "no-such-page/",
+  );
+
+  for (const path of indexed) {
+    await page.goto(path);
+    const title = await page.title();
+    const description = await page
+      .locator('meta[name="description"]')
+      .getAttribute("content");
+    const canonical = await page
+      .locator('link[rel="canonical"]')
+      .getAttribute("href");
+
+    expect(titles.has(title), `${path} title is unique`).toBe(false);
+    expect(descriptions.has(description!), `${path} description`).toBe(false);
+    expect(description!.length, `${path} description`).toBeGreaterThan(50);
+    expect(new URL(canonical!).pathname, `${path} canonical`).toBe(path);
+    await expect(page.getByRole("heading", { level: 1 })).toHaveCount(1);
+    titles.add(title);
+    descriptions.add(description!);
+  }
+  expect(indexed.length).toBeGreaterThanOrEqual(2);
+});
+
 test("no page scrolls sideways or cuts off content at any breakpoint", async ({
   page,
   request,

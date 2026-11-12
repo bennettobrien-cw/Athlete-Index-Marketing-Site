@@ -1,0 +1,76 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Features from "../components/Features.astro";
+import FinalCta from "../components/FinalCta.astro";
+import { config } from "../config";
+import { cta, featuresPage, pages, trialTerms } from "../content/site";
+
+const { sports, midCta } = featuresPage;
+---
+
+<BaseLayout {...pages.features}>
+  <main>
+    <section class="mx-auto max-w-7xl px-4 pt-16 pb-4 sm:px-6 lg:pt-24">
+      <p class="text-accent text-sm font-bold tracking-widest uppercase">
+        {featuresPage.eyebrow}
+      </p>
+      <h1 class="mt-4 max-w-4xl text-4xl leading-[0.95] sm:text-6xl">
+        {featuresPage.heading}
+      </h1>
+      <p class="text-muted mt-6 max-w-2xl text-lg">{featuresPage.intro}</p>
+    </section>
+
+    <Features showLink={false} />
+
+    <section class="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+      <div class="border-accent flex flex-col gap-6 rounded-2xl border p-8 lg:flex-row lg:items-center lg:justify-between">
+        <div>
+          <h2 class="text-3xl">{midCta.heading}</h2>
+          <p class="text-muted mt-2">{midCta.body}</p>
+        </div>
+        <div class="flex flex-col gap-2">
+          <a
+            href={config.signupUrl}
+            data-cta="features-mid"
+            class="bg-accent text-ink hover:bg-accent-hover rounded-md px-7 py-4 text-center text-lg font-bold"
+          >
+            {cta.primary}
+          </a>
+          <p class="text-muted text-sm">{trialTerms}</p>
+        </div>
+      </div>
+    </section>
+
+    <section
+      aria-labelledby="sports-heading"
+      class="mx-auto max-w-7xl px-4 pb-20 sm:px-6 lg:pb-28"
+    >
+      <h2 id="sports-heading" class="text-4xl sm:text-5xl">
+        {sports.heading}
+      </h2>
+      <p class="text-muted mt-4 max-w-xl text-lg">{sports.intro}</p>
+      <div class="mt-10 grid gap-6 md:grid-cols-3">
+        {sports.items.map((sport) => (
+          <div
+            data-testid={`sport-${sport.id}`}
+            class="border-line bg-surface rounded-2xl border p-6"
+          >
+            <h3 class="text-2xl">{sport.name}</h3>
+            <ul class="mt-4 space-y-2">
+              {sport.measurables.map((measurable) => (
+                <li class="flex gap-3">
+                  <span aria-hidden="true" class="text-accent font-bold">
+                    ✓
+                  </span>
+                  {measurable}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <FinalCta />
+  </main>
+</BaseLayout>
