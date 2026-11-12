@@ -1,5 +1,5 @@
 ---
-import type { FormField } from "../content/site";
+import { formMessages, type FormField } from "../content/site";
 
 interface Props {
   id: string;
@@ -66,6 +66,13 @@ const fieldClass =
   >
     {submitLabel}
   </button>
+  <p
+    data-testid="form-status"
+    role="status"
+    data-success={formMessages.success}
+    data-failure={formMessages.failure}
+    class="font-medium"
+  ></p>
 </form>
 
 <script>
@@ -73,6 +80,22 @@ const fieldClass =
     "[data-form]",
   )) {
     const fields = [...form.querySelectorAll<HTMLInputElement>("[data-error]")];
+    const status = form.querySelector<HTMLElement>("[role=status]")!;
+
+    async function send() {
+      const response = await fetch(form.action, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(Object.fromEntries(new FormData(form))),
+      });
+      if (response.ok) {
+        status.textContent = status.dataset.success!;
+        form.reset();
+      }
+    }
 
     function showErrors() {
       const invalid = fields.filter((field) => !field.checkValidity());
@@ -91,7 +114,11 @@ const fieldClass =
     form.addEventListener("submit", (event) => {
       event.preventDefault();
       const invalid = showErrors();
-      if (invalid.length > 0) invalid[0].focus();
+      if (invalid.length > 0) {
+        invalid[0].focus();
+        return;
+      }
+      send();
     });
   }
 </script>

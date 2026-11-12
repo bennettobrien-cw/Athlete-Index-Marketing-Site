@@ -1,13 +1,30 @@
-import { test, expect } from "@playwright/test";
+import { test, expect, type Page, type Request } from "@playwright/test";
+import { config } from "../src/config";
+
+async function mockFormspree(page: Page, status = 200) {
+  const requests: Request[] = [];
+  await page.route("https://formspree.io/**", (route) => {
+    requests.push(route.request());
+    return route.fulfill({ status, json: { ok: status === 200 } });
+  });
+  return requests;
+}
+
+async function fillContactForm(page: Page) {
+  const form = page.getByRole("form", { name: "Contact us" });
+  await form.getByLabel("Name", { exact: true }).fill("Sam Rivera");
+  await form.getByLabel("Email", { exact: true }).fill("sam@example.com");
+  await form.getByLabel("I am a…").selectOption("Parent or guardian");
+  await form
+    .getByLabel("Message", { exact: true })
+    .fill("How does the parent-linked account work?");
+  return form;
+}
 
 test("submitting an empty contact form flags each required field and sends nothing", async ({
   page,
 }) => {
-  const posts: string[] = [];
-  await page.route("https://formspree.io/**", (route) => {
-    posts.push(route.request().url());
-    return route.fulfill({ status: 200, json: { ok: true } });
-  });
+  const requests = await mockFormspree(page);
   await page.goto("contact/");
   const form = page.getByRole("form", { name: "Contact us" });
 
@@ -20,5 +37,31 @@ test("submitting an empty contact form flags each required field and sends nothi
     await expect(page.locator(`#${errorId}`)).toBeVisible();
   }
   await expect(form.getByLabel("Name", { exact: true })).toBeFocused();
-  expect(posts).toEqual([]);
+  expect(requests).toEqual([]);
+});
+
+test("a completed contact form is sent as JSON and confirmed", async ({
+  page,
+}) => {
+  await page.clock.install();
+  const requests = await mockFormspree(page);
+  await page.goto("contact/");
+  const form = await fillContactForm(page);
+  await page.clock.fastForward(10_000);
+
+  await form.getByRole("button", { name: "Send message" }).click();
+
+  await expect(page.getByTestId("form-status")).toHaveText(
+    /your message is on its way/i,
+  );
+  expect(requests).toHaveLength(1);
+  expect(requests[0].url()).toBe(config.forms.contact);
+  expect(requests[0].headers()["accept"]).toBe("application/json");
+  expect(requests[0].postDataJSON()).toEqual({
+    name: "Sam Rivera",
+    email: "sam@example.com",
+    role: "Parent or guardian",
+    message: "How does the parent-linked account work?",
+  });
+  await expect(form.getByLabel("Name", { exact: true })).toHaveValue("");
 });
