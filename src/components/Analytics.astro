@@ -1,0 +1,32 @@
+---
+import { config } from "../config";
+---
+
+{config.plausibleDomain && (
+  <script
+    is:inline
+    defer
+    data-domain={config.plausibleDomain}
+    src="https://plausible.io/js/script.js"
+  />
+)}
+
+<script>
+  type Plausible = (
+    event: string,
+    options: { props: Record<string, string> },
+  ) => void;
+
+  document.addEventListener("click", (event) => {
+    const link = (event.target as Element).closest<HTMLElement>("[data-cta]");
+    if (!link) return;
+    const plausible = (window as unknown as { plausible?: Plausible })
+      .plausible;
+    plausible?.("cta_click", {
+      props: {
+        location: link.dataset.cta!,
+        label: link.textContent!.trim(),
+      },
+    });
+  });
+</script>

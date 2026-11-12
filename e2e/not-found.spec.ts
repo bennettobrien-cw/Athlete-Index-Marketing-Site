@@ -16,8 +16,7 @@ test("an unknown URL shows a 404 page that leads back home and to a trial", asyn
     "href",
     new URL(config.siteUrl).pathname,
   );
-  await expect(page.getByTestId("not-found-signup")).toHaveAttribute(
-    "href",
-    config.signupUrl,
-  );
+  const signup = page.getByTestId("not-found-signup");
+  await expect(signup).toHaveAttribute("href", config.signupUrl);
+  await expect(signup).toHaveAttribute("data-cta", "not-found");
 });

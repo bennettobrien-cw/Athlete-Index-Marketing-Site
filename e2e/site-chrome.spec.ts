@@ -39,6 +39,21 @@ test("on a phone the nav opens from a menu button and closes with Escape", async
   const menuButton = page.getByRole("button", { name: "Menu" });
   const mobileNav = page.getByRole("navigation", { name: "Mobile" });
 
+  const headerCta = page
+    .getByRole("banner")
+    .getByRole("link", { name: "Start free trial" });
+  const ctaLineHeight = await headerCta.evaluate((el) =>
+    parseFloat(getComputedStyle(el).lineHeight),
+  );
+  const ctaPadding = await headerCta.evaluate(
+    (el) =>
+      parseFloat(getComputedStyle(el).paddingTop) +
+      parseFloat(getComputedStyle(el).paddingBottom),
+  );
+  expect((await headerCta.boundingBox())!.height).toBe(
+    ctaLineHeight + ctaPadding,
+  );
+
   await expect(menuButton).toHaveAttribute("aria-expanded", "false");
   await expect(mobileNav).toBeHidden();
 
@@ -73,7 +88,7 @@ test("footer links to every page, the legal drafts and says we are not the NCAA"
     ).toHaveAttribute("href", new URL(path, config.siteUrl).pathname);
   }
   await expect(footer.getByTestId("ncaa-disclaimer")).toBeVisible();
-  await expect(footer.getByTestId("copyright")).toContainText(
-    String(new Date().getFullYear()),
+  await expect(footer.getByTestId("copyright")).toHaveText(
+    `© ${new Date().getFullYear()} Athlete Index`,
   );
 });
