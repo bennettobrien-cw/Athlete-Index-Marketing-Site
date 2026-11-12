@@ -3,6 +3,8 @@ import { config } from "../config";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import Analytics from "../components/Analytics.astro";
+import displayFont from "@fontsource-variable/archivo/files/archivo-latin-wdth-italic.woff2?url";
+import bodyFont from "@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2?url";
 import "../styles/global.css";
 
 interface Props {
@@ -21,6 +23,9 @@ const ogImage = new URL("og.png", config.siteUrl).href;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {[displayFont, bodyFont].map((font) => (
+      <link rel="preload" href={font} as="font" type="font/woff2" crossorigin />
+    ))}
     <title>{title}</title>
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex" />}

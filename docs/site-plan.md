@@ -1,6 +1,6 @@
 # Athlete Index — Site plan
 
-Based on [research.md](research.md). Status: **awaiting approval**.
+Based on [research.md](research.md). Status: **approved 2026-11-11, built**. See [launch-report.md](launch-report.md).
 
 ## Decisions already made
 

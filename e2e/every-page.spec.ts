@@ -42,6 +42,25 @@ test("every page meets WCAG 2.2 AA", async ({ page, request, baseURL }) => {
   }
 });
 
+test("every page's headings step down one level at a time", async ({
+  page,
+  request,
+  baseURL,
+}) => {
+  for (const path of await everyPagePath(request, baseURL!)) {
+    await page.goto(path);
+    const levels = await page
+      .getByRole("heading")
+      .evaluateAll((headings) =>
+        headings.map((heading) => Number(heading.tagName.slice(1))),
+      );
+    const skips = levels
+      .map((level, index) => [levels[index - 1] ?? 1, level])
+      .filter(([previous, level]) => level > previous + 1);
+    expect(skips, path).toEqual([]);
+  }
+});
+
 test("every indexed page has its own title, description, canonical URL and one h1", async ({
   page,
   request,
@@ -104,5 +123,40 @@ test("no page scrolls sideways or cuts off content at any breakpoint", async ({
       });
       expect(cutOff, `${path} at ${width}px`).toEqual([]);
     }
+  }
+});
+
+test("no page jumps around while slow fonts arrive", async ({
+  page,
+  request,
+  baseURL,
+}) => {
+  await page.setViewportSize({ width: 375, height: 800 });
+  await page.route("**/*.woff2", async (route) => {
+    await new Promise((resolve) => setTimeout(resolve, 400));
+    await route.continue();
+  });
+  await page.addInitScript(() => {
+    const shifts = { total: 0 };
+    (window as unknown as { layoutShift: typeof shifts }).layoutShift = shifts;
+    new PerformanceObserver((list) => {
+      for (const entry of list.getEntries() as unknown as {
+        value: number;
+        hadRecentInput: boolean;
+      }[]) {
+        if (!entry.hadRecentInput) shifts.total += entry.value;
+      }
+    }).observe({ type: "layout-shift", buffered: true });
+  });
+
+  for (const path of await everyPagePath(request, baseURL!)) {
+    await page.goto(path);
+    await page.waitForTimeout(1000);
+    const shift = await page.evaluate(
+      () =>
+        (window as unknown as { layoutShift: { total: number } }).layoutShift
+          .total,
+    );
+    expect(shift, path).toBeLessThan(0.1);
   }
 });
