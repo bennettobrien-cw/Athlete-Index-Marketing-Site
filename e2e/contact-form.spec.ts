@@ -82,3 +82,21 @@ test("when sending fails the visitor is told and keeps what they typed", async (
     "Sam Rivera",
   );
 });
+
+test("a bot that fills the hidden honeypot is quietly ignored", async ({
+  page,
+}) => {
+  await page.clock.install();
+  const requests = await mockFormspree(page);
+  await page.goto("contact/");
+  const form = await fillContactForm(page);
+  await page.getByTestId("honeypot").fill("http://spam.example");
+  await page.clock.fastForward(10_000);
+
+  await form.getByRole("button", { name: "Send message" }).click();
+
+  await expect(page.getByTestId("form-status")).toHaveText(
+    /your message is on its way/i,
+  );
+  expect(requests).toEqual([]);
+});

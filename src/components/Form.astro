@@ -60,6 +60,19 @@ const fieldClass =
     );
   })}
 
+  <div aria-hidden="true" class="absolute -left-[9999px]">
+    <label>
+      Leave this empty
+      <input
+        type="text"
+        name="_gotcha"
+        tabindex="-1"
+        autocomplete="off"
+        data-testid="honeypot"
+      />
+    </label>
+  </div>
+
   <button
     type="submit"
     class="bg-accent text-ink hover:bg-accent-hover rounded-md px-7 py-4 text-lg font-bold"
@@ -82,7 +95,12 @@ const fieldClass =
     const fields = [...form.querySelectorAll<HTMLInputElement>("[data-error]")];
     const status = form.querySelector<HTMLElement>("[role=status]")!;
 
-    async function post() {
+    function looksLikeABot(data: FormData) {
+      return data.get("_gotcha") !== "";
+    }
+
+    async function post(data: FormData) {
+      data.delete("_gotcha");
       try {
         const response = await fetch(form.action, {
           method: "POST",
@@ -90,7 +108,7 @@ const fieldClass =
             Accept: "application/json",
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(Object.fromEntries(new FormData(form))),
+          body: JSON.stringify(Object.fromEntries(data)),
         });
         return response.ok;
       } catch {
@@ -99,7 +117,8 @@ const fieldClass =
     }
 
     async function send() {
-      if (await post()) {
+      const data = new FormData(form);
+      if (looksLikeABot(data) || (await post(data))) {
         status.textContent = status.dataset.success!;
         form.reset();
       } else {
