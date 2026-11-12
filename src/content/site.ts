@@ -114,6 +114,7 @@ export const pricingPage = {
   heading: "Prices on the page. No sales calls.",
   intro:
     "Start free. If Athlete Index isn't for you, cancel online in one click before the trial ends and you won't be charged.",
+  plansHeading: "Choose a plan",
   billing: [
     { id: "monthly", label: "Monthly" },
     { id: "annual", label: "Annual" },

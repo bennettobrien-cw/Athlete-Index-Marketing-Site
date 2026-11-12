@@ -42,6 +42,25 @@ test("every page meets WCAG 2.2 AA", async ({ page, request, baseURL }) => {
   }
 });
 
+test("every page's headings step down one level at a time", async ({
+  page,
+  request,
+  baseURL,
+}) => {
+  for (const path of await everyPagePath(request, baseURL!)) {
+    await page.goto(path);
+    const levels = await page
+      .getByRole("heading")
+      .evaluateAll((headings) =>
+        headings.map((heading) => Number(heading.tagName.slice(1))),
+      );
+    const skips = levels
+      .map((level, index) => [levels[index - 1] ?? 1, level])
+      .filter(([previous, level]) => level > previous + 1);
+    expect(skips, path).toEqual([]);
+  }
+});
+
 test("every indexed page has its own title, description, canonical URL and one h1", async ({
   page,
   request,
