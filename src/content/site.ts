@@ -11,6 +11,12 @@ export const pages = {
     description:
       "Put your game where recruiters look. Your measurables, PRs and highlight film in one athlete profile college coaches can search. Start a free trial.",
   },
+  pricing: {
+    path: "pricing/",
+    title: "Pricing | Athlete Index",
+    description:
+      "Athlete Index pricing for athletes, families and recruiters. Start with a free trial, see every price on the page, and cancel online in one click.",
+  },
   notFound: {
     path: "404/",
     title: "Page not found | Athlete Index",
@@ -39,6 +45,7 @@ export const plans = [
     audience: "For athletes and their families",
     price: pricing.athleteMonthly,
     period: "/mo",
+    annual: { price: pricing.athleteAnnual, period: "/yr" },
     alternative: `or ${pricing.athleteAnnual}/yr billed annually`,
     features: [
       "Full profile with measurables",
@@ -71,6 +78,92 @@ export const plans = [
     featured: false,
   },
 ];
+
+export const pricingPage = {
+  eyebrow: "Pricing",
+  heading: "Prices on the page. No sales calls.",
+  intro:
+    "Start free. If Athlete Index isn't for you, cancel online in one click before the trial ends and you won't be charged.",
+  billing: [
+    { id: "monthly", label: "Monthly" },
+    { id: "annual", label: "Annual" },
+  ],
+  comparison: {
+    caption: "Compare plans",
+    columns: ["Feature", "Athlete", "Recruiter"],
+    rows: [
+      ["Profile with measurables", true, false],
+      ["Post results and updates", true, false],
+      ["Highlight video uploads", true, false],
+      ["Verified result badges", "Earn them", "Filter by them"],
+      ["Search athletes by class, position and numbers", false, true],
+      ["Search teams, recruiters and events", true, true],
+      ["AI Assistant", true, false],
+      ["Parent-linked account", true, false],
+      ["Saved searches and shortlists", false, true],
+      ["Verified recruiter badge", false, true],
+      ["Free trial", pricing.trialLength, "On request"],
+      ["Cancel online in one click", true, true],
+    ] as [string, boolean | string, boolean | string][],
+  },
+};
+
+export const trialSteps = {
+  heading: "How the free trial works",
+  steps: [
+    {
+      title: "Start your trial",
+      body: `Sign up with a parent's card or your own. You won't be charged during the ${pricing.trialLength} trial.`,
+    },
+    {
+      title: "Get a reminder",
+      body: "We email you [REMINDER DAYS] days before the trial ends, with the price and a link to cancel.",
+    },
+    {
+      title: "Your plan renews",
+      body: `If you don't cancel, your plan starts at ${pricing.athleteMonthly}/mo or ${pricing.athleteAnnual}/yr and renews automatically until you cancel.`,
+    },
+    {
+      title: "Cancel anytime",
+      body: "Cancel online in one click from your account settings. No calls and no forms.",
+    },
+  ],
+  autoRenewTerms:
+    "Subscriptions renew automatically at the then-current price until cancelled. Cancel online at any time; cancellation takes effect at the end of the current billing period. [LEGAL REVIEW: confirm renewal, reminder and refund terms.]",
+};
+
+export const pricingFaq = {
+  heading: "Pricing questions",
+  items: [
+    {
+      question: "Do I need a card to start the trial?",
+      answer: "[CONFIRM: whether a card is required to start the trial.]",
+    },
+    {
+      question: "Can a parent pay for their athlete?",
+      answer:
+        "Yes. A parent or guardian can be the account holder and payer, and athletes under 18 need one. Trial reminders and receipts go to the person who pays.",
+    },
+    {
+      question: "How do I cancel?",
+      answer:
+        "Online, in one click, from your account settings. No phone calls and no forms. You keep access until the end of the period you've paid for.",
+    },
+    {
+      question: "Do you offer refunds?",
+      answer: "[CONFIRM: refund policy, including partial-period refunds.]",
+    },
+    {
+      question: "Can I pay yearly?",
+      answer: `Yes. The Athlete plan is ${pricing.athleteMonthly}/mo, or ${pricing.athleteAnnual}/yr paid annually. [CONFIRM: annual saving to state here.]`,
+    },
+    {
+      question: "How does recruiter pricing work?",
+      answer:
+        "Recruiter access is for verified college coaches and scouts. Request access, we verify you, and then we turn your account on. Team and department plans are available on request.",
+    },
+  ],
+};
 
 export const pricingPreview = {
   heading: "Simple, honest pricing",

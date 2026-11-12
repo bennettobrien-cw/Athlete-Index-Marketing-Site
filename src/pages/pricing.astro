@@ -1,0 +1,60 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PlanCard from "../components/PlanCard.astro";
+import ComparisonTable from "../components/ComparisonTable.astro";
+import TrialSteps from "../components/TrialSteps.astro";
+import Faq from "../components/Faq.astro";
+import { pages, plans, pricingFaq, pricingPage } from "../content/site";
+---
+
+<BaseLayout {...pages.pricing}>
+  <main>
+    <section class="mx-auto max-w-5xl px-4 pt-16 pb-12 sm:px-6 lg:pt-24">
+      <p class="text-accent text-sm font-bold tracking-widest uppercase">
+        {pricingPage.eyebrow}
+      </p>
+      <h1 class="mt-4 text-4xl leading-[0.95] sm:text-6xl">
+        {pricingPage.heading}
+      </h1>
+      <p class="text-muted mt-6 max-w-2xl text-lg">{pricingPage.intro}</p>
+
+      <div class="group/billing mt-12">
+        <div
+          role="radiogroup"
+          aria-labelledby="billing-label"
+          class="border-line inline-flex items-center gap-1 rounded-full border p-1"
+        >
+          <span id="billing-label" class="sr-only">
+            Billing
+          </span>
+          {pricingPage.billing.map((option, index) => (
+            <label class="has-checked:bg-accent has-checked:text-ink text-muted has-focus-visible:outline-accent cursor-pointer rounded-full px-5 py-2 font-bold has-focus-visible:outline-3">
+              <input
+                type="radio"
+                name="billing"
+                id={`billing-${option.id}`}
+                checked={index === 0}
+                class="sr-only"
+              />
+              {option.label}
+            </label>
+          ))}
+        </div>
+
+        <div class="mt-8 grid gap-6 md:grid-cols-2">
+          {plans.map((plan) => (
+            <PlanCard plan={plan} />
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <TrialSteps />
+
+    <section class="mx-auto max-w-5xl px-4 py-16 sm:px-6">
+      <ComparisonTable />
+    </section>
+
+    <Faq id="pricing-faq" {...pricingFaq} />
+  </main>
+</BaseLayout>

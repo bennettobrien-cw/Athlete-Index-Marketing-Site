@@ -1,0 +1,58 @@
+---
+import { pricingPage } from "../content/site";
+
+const { caption, columns, rows } = pricingPage.comparison;
+---
+
+<table class="w-full border-collapse text-left text-sm sm:text-base">
+  <caption class="font-display mb-6 text-left text-3xl font-black uppercase italic sm:text-4xl">
+    {caption}
+  </caption>
+  <thead>
+    <tr class="border-line border-b">
+      {columns.map((column, index) => (
+        <th
+          scope="col"
+          class:list={[
+            "py-3 font-bold",
+            index === 0 ? "pr-4" : "w-24 text-center sm:w-40",
+          ]}
+        >
+          {column}
+        </th>
+      ))}
+    </tr>
+  </thead>
+  <tbody>
+    {rows.map(([feature, ...values]) => (
+      <tr class="border-line border-b">
+        <th scope="row" class="py-3 pr-4 font-medium">
+          {feature}
+        </th>
+        {values.map((value) => (
+          <td class="py-3 text-center">
+            {value === true && (
+              <>
+                <span aria-hidden="true" class="text-accent font-bold">
+                  ✓
+                </span>
+                <span class="sr-only">Included</span>
+              </>
+            )}
+            {value === false && (
+              <>
+                <span aria-hidden="true" class="text-muted">
+                  ✕
+                </span>
+                <span class="sr-only">Not included</span>
+              </>
+            )}
+            {typeof value === "string" && (
+              <span class="text-muted">{value}</span>
+            )}
+          </td>
+        ))}
+      </tr>
+    ))}
+  </tbody>
+</table>

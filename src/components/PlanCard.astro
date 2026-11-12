@@ -1,4 +1,5 @@
 ---
+import PriceTag from "./PriceTag.astro";
 import { config } from "../config";
 import type { plans } from "../content/site";
 
@@ -10,7 +11,6 @@ const { plan } = Astro.props;
 const base = import.meta.env.BASE_URL;
 const href =
   plan.cta.to === "signup" ? config.signupUrl : `${base}${plan.cta.to}`;
-const isPlaceholder = (value: string) => value.startsWith("[");
 ---
 
 <article
@@ -26,19 +26,25 @@ const isPlaceholder = (value: string) => value.startsWith("[");
   </h3>
   <p class="text-muted mt-1">{plan.audience}</p>
 
-  <p class="mt-6 flex items-baseline gap-1">
-    <span
-      data-placeholder={String(isPlaceholder(plan.price))}
+  <div class="mt-6">
+    <PriceTag
+      price={plan.price}
+      period={plan.period}
+      testId="price-monthly"
       class:list={[
-        "font-display text-5xl font-black italic",
-        isPlaceholder(plan.price) &&
-          "border-accent text-accent rounded border border-dashed px-2 text-3xl",
+        "flex",
+        plan.annual && "group-has-[#billing-annual:checked]/billing:hidden",
       ]}
-    >
-      {plan.price}
-    </span>
-    <span class="text-muted">{plan.period}</span>
-  </p>
+    />
+    {plan.annual && (
+      <PriceTag
+        price={plan.annual.price}
+        period={plan.annual.period}
+        testId="price-annual"
+        class="hidden group-has-[#billing-annual:checked]/billing:flex"
+      />
+    )}
+  </div>
   <p class="text-muted mt-1 text-sm">{plan.alternative}</p>
 
   <ul class="mt-6 flex-1 space-y-2">
