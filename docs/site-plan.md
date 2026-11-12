@@ -56,16 +56,14 @@ Based on [research.md](research.md). Status: **awaiting approval**.
 ## Home page, section by section
 
 1. **Header.** Logo, nav (Features, Pricing, Parents, Recruiters), a "Log in" text link and a **Start free trial** button. On mobile, a menu button opens the nav, and the CTA stays visible.
-2. **Hero.** One message, one action.
-   - **Headline options:**
-     - A. **"Get seen. Get recruited."**
-     - B. **"Your numbers. Your film. In front of recruiters."**
-     - C. **"Put your game where recruiters look."**
-   - **Subhead options:**
-     - A. "Build your athlete profile, post verified results and highlights, and get found by college coaches. All in one place."
-     - B. "One profile for your measurables, PRs and film, built so recruiters at every level can find you fast."
-     - C. "Stop emailing stats into the void. Post your results once and let recruiters search for you."
-   - **CTAs:** **Start free trial** and a secondary "See how it works" (scrolls to step 3). Below them, the line "`[TRIAL LENGTH]` free, then `[PRICE]`/mo. Cancel anytime in one click."
+2. **Hero.** One message, one action, plus a way in for recruiters.
+   - **Headline (chosen):** **"Get seen. Get recruited."**
+   - **Subhead (chosen):** "Put your game where recruiters look: your measurables, PRs and film in one profile coaches can search."
+   - **Alternatives** kept in the content file for A/B tests:
+     - Headline: "Your numbers. Your film. In front of recruiters."
+     - Subhead: "Stop emailing stats into the void. Post your results once and let recruiters search for you."
+   - **CTAs:** **Start free trial** and a secondary "See how it works" (scrolls to the How it works section). Below them, the line "`[TRIAL LENGTH]` free, then `[PRICE]`/mo. Cancel anytime in one click."
+   - **Recruiter line:** a strip at the bottom of the hero that reads "Recruiting? Find verified athletes by class, position and numbers →" and links to /recruiters.
    - **Visual:** an HTML/CSS mock of a phone showing a fictional athlete profile, with a "40-yard dash 4.48s · Verified" result card, a highlight thumbnail and a feed post, plus a counter that animates on load. All names are fictional and marked as samples.
 3. **Proof strip.**
    - `[STAT: athletes]`, `[STAT: results posted]`, `[STAT: recruiters]` as counters, and `[LOGO: partner]` slots.
@@ -151,7 +149,7 @@ On mobile, a sticky bottom **Start free trial** bar appears after the hero scrol
 - **Fonts:** Archivo (display) and Space Grotesk (body).
   - They are **self-hosted from the same Google Fonts files through Fontsource**, not loaded from fonts.googleapis.com. This avoids the third-party request (faster LCP, and Google doesn't receive visitors' IPs) and keeps the same fonts.
   - Fallbacks are size-adjusted.
-  - **This differs from the brief's "load from Google Fonts".** Flag it if you'd prefer the hosted CSS.
+  - This differs from the brief's "load from Google Fonts"; the change was approved.
 - **Design tokens** (CSS custom properties, Tailwind theme):
 
   | Token | Value | Notes |
@@ -230,6 +228,4 @@ On mobile, a sticky bottom **Start free trial** bar appears after the hero scrol
 20. Whether California's companion-chatbot law (SB 243) applies to the AI Assistant.
 21. Confirming a US-only launch.
 
-**Repo**
-22. Which GitHub owner should the repo live under: `bennettobrien-cw` or an organization?
-23. Public or private? GitHub Pages on a private repo needs a paid plan.
+**Repo** (decided): public repo `bennettobrien-cw/Athlete-Index-Marketing-Site`, served by GitHub Pages at `https://bennettobrien-cw.github.io/Athlete-Index-Marketing-Site/` until `[SITE_URL]` is set.
