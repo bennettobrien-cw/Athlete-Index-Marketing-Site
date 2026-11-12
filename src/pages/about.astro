@@ -1,0 +1,57 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import FinalCta from "../components/FinalCta.astro";
+import { aboutPage, pages } from "../content/site";
+
+const { principles, team } = aboutPage;
+---
+
+<BaseLayout {...pages.about}>
+  <main>
+    <section class="mx-auto max-w-5xl px-4 pt-16 pb-16 sm:px-6 lg:pt-24">
+      <p class="text-accent text-sm font-bold tracking-widest uppercase">
+        {aboutPage.eyebrow}
+      </p>
+      <h1 class="mt-4 text-4xl leading-[0.95] sm:text-6xl">
+        {aboutPage.heading}
+      </h1>
+      <p data-testid="mission" class="mt-8 text-xl leading-relaxed sm:text-2xl">
+        {aboutPage.mission}
+      </p>
+    </section>
+
+    <section
+      aria-labelledby="principles-heading"
+      class="border-line bg-surface/40 border-y"
+    >
+      <div class="mx-auto max-w-5xl px-4 py-20 sm:px-6">
+        <h2 id="principles-heading" class="text-4xl sm:text-5xl">
+          {principles.heading}
+        </h2>
+        <ol class="mt-10 space-y-8">
+          {principles.items.map((item, index) => (
+            <li class="flex gap-6">
+              <span
+                aria-hidden="true"
+                class="font-display text-accent text-4xl font-black italic"
+              >
+                {index + 1}
+              </span>
+              <div>
+                <h3 class="text-2xl">{item.title}</h3>
+                <p class="text-muted mt-1 text-lg">{item.body}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-5xl px-4 py-20 sm:px-6">
+      <h2 class="text-4xl sm:text-5xl">{team.heading}</h2>
+      <p class="text-muted mt-4 text-lg">{team.body}</p>
+    </section>
+
+    <FinalCta />
+  </main>
+</BaseLayout>
