@@ -153,6 +153,58 @@ export const features = {
   ],
 };
 
+export const audiences = {
+  heading: "Who it's for",
+  intro:
+    "One platform, built around the four people in every recruiting story.",
+  tabs: [
+    {
+      id: "athletes",
+      label: "Athletes",
+      headline: "Get on the radar of coaches at every level",
+      points: [
+        "A profile that looks pro on day one",
+        "Results and film coaches can trust",
+        "Know your next move with the AI Assistant",
+      ],
+      cta: { label: "Start free trial", to: "signup" },
+    },
+    {
+      id: "parents",
+      label: "Parents",
+      headline: "Help your athlete get seen, safely and honestly",
+      points: [
+        "Price shown up front. No sales calls. Cancel in one click.",
+        "A parent-linked account and control over who sees what",
+        "Verified recruiters only, and no scholarship promises",
+      ],
+      cta: { label: "Start free trial", to: "signup" },
+    },
+    {
+      id: "coaches",
+      label: "Coaches",
+      headline: "Showcase your athletes and back their numbers",
+      points: [
+        "Confirm the results you timed yourself",
+        "Point college coaches to one profile per athlete",
+        "Works alongside the film tools you already use",
+      ],
+      cta: { label: "Start free trial", to: "signup" },
+    },
+    {
+      id: "recruiters",
+      label: "Recruiters",
+      headline: "Find athletes worth a second look, faster",
+      points: [
+        "Filter by sport, class, position and verified numbers",
+        "Short film tied to the results it proves",
+        "Coach-confirmed results, not just self-reported claims",
+      ],
+      cta: { label: "Request recruiter access", to: "recruiters/" },
+    },
+  ],
+};
+
 export const sampleProfile = {
   label: "Sample athlete profile",
   badge: "Sample profile",

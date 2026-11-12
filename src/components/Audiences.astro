@@ -1,0 +1,96 @@
+---
+import { config } from "../config";
+import { audiences } from "../content/site";
+
+const base = import.meta.env.BASE_URL;
+const ctaHref = (to: string) =>
+  to === "signup" ? config.signupUrl : `${base}${to}`;
+---
+
+<section
+  aria-labelledby="audiences-heading"
+  class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:py-28"
+>
+  <h2 id="audiences-heading" class="text-4xl sm:text-5xl">
+    {audiences.heading}
+  </h2>
+  <p class="text-muted mt-4 max-w-xl text-lg">{audiences.intro}</p>
+
+  <div data-tabs class="mt-10">
+    <div
+      role="tablist"
+      aria-label={audiences.heading}
+      class="border-line grid grid-cols-2 gap-1 border-b sm:flex"
+    >
+      {audiences.tabs.map((tab, index) => (
+        <button
+          type="button"
+          role="tab"
+          id={`tab-${tab.id}`}
+          aria-controls={`panel-${tab.id}`}
+          aria-selected={index === 0 ? "true" : "false"}
+          tabindex={index === 0 ? 0 : -1}
+          data-tab={tab.id}
+          class="aria-selected:border-accent aria-selected:text-white text-muted -mb-px border-b-3 border-transparent px-4 py-3 font-bold whitespace-nowrap hover:text-white"
+        >
+          {tab.label}
+        </button>
+      ))}
+    </div>
+
+    {audiences.tabs.map((tab, index) => (
+      <div
+        role="tabpanel"
+        id={`panel-${tab.id}`}
+        aria-labelledby={`tab-${tab.id}`}
+        hidden={index !== 0}
+        class="grid grid-cols-1 gap-8 py-10 lg:grid-cols-[1fr_auto] lg:items-end"
+      >
+        <div>
+          <h3 class="text-3xl sm:text-4xl">{tab.headline}</h3>
+          <ul class="mt-6 space-y-3 text-lg">
+            {tab.points.map((point) => (
+              <li class="flex gap-3">
+                <span aria-hidden="true" class="text-accent font-bold">
+                  ✓
+                </span>
+                {point}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <a
+          href={ctaHref(tab.cta.to)}
+          data-testid="audience-cta"
+          data-cta={tab.cta.to === "signup" ? `audience-${tab.id}` : undefined}
+          class="bg-accent text-ink hover:bg-accent-hover rounded-md px-7 py-4 text-center text-lg font-bold"
+        >
+          {tab.cta.label}
+        </a>
+      </div>
+    ))}
+  </div>
+</section>
+
+<script>
+  for (const tabs of document.querySelectorAll<HTMLElement>("[data-tabs]")) {
+    const buttons = [...tabs.querySelectorAll<HTMLButtonElement>("[role=tab]")];
+
+    function select(next: HTMLButtonElement) {
+      for (const button of buttons) {
+        const selected = button === next;
+        button.setAttribute("aria-selected", String(selected));
+        button.tabIndex = selected ? 0 : -1;
+        document.getElementById(button.getAttribute("aria-controls")!)!.hidden =
+          !selected;
+      }
+    }
+
+    tabs.addEventListener("click", (event) => {
+      const button = (event.target as Element).closest<HTMLButtonElement>(
+        "[role=tab]",
+      );
+      if (button) select(button);
+    });
+  }
+</script>
