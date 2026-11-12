@@ -435,7 +435,6 @@ export type FormField = {
 };
 
 export const formMessages = {
-  sending: "Sending…",
   success: "Thanks! Your message is on its way. We'll reply by email.",
   failure:
     "Something went wrong and your message wasn't sent. Please try again, or email us instead.",

@@ -89,6 +89,8 @@ const fieldClass =
 </form>
 
 <script>
+  import { track } from "../scripts/track";
+
   for (const form of document.querySelectorAll<HTMLFormElement>(
     "[data-form]",
   )) {
@@ -121,11 +123,17 @@ const fieldClass =
       }
     }
 
+    function succeed() {
+      status.textContent = status.dataset.success!;
+      form.reset();
+    }
+
     async function send() {
       const data = new FormData(form);
-      if (looksLikeABot(data) || (await post(data))) {
-        status.textContent = status.dataset.success!;
-        form.reset();
+      if (looksLikeABot(data)) return succeed();
+      if (await post(data)) {
+        track("form_submit", { form: form.id });
+        succeed();
       } else {
         status.textContent = status.dataset.failure!;
       }
