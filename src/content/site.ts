@@ -27,6 +27,13 @@ export const hero = {
   headline: "Get seen. Get recruited.",
 };
 
+export const nav = [
+  { label: "Features", path: "features/" },
+  { label: "Pricing", path: "pricing/" },
+  { label: "Parents", path: "parents/" },
+  { label: "Recruiters", path: "recruiters/" },
+];
+
 export const cta = {
   primary: "Start free trial",
 };
