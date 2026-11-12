@@ -1,0 +1,97 @@
+---
+import type { FormField } from "../content/site";
+
+interface Props {
+  id: string;
+  label: string;
+  endpoint: string;
+  submitLabel: string;
+  fields: FormField[];
+}
+
+const { id, label, endpoint, submitLabel, fields } = Astro.props;
+const fieldClass =
+  "bg-ink border-line focus:border-accent aria-invalid:border-red-400 mt-2 block w-full rounded-md border px-4 py-3 text-white";
+---
+
+<form
+  id={id}
+  aria-label={label}
+  action={endpoint}
+  method="POST"
+  novalidate
+  data-form
+  class="space-y-6"
+>
+  {fields.map((field) => {
+    const fieldId = `${id}-${field.name}`;
+    const errorId = `${fieldId}-error`;
+    const common = {
+      id: fieldId,
+      name: field.name,
+      required: field.required,
+      autocomplete: field.autocomplete,
+      "aria-describedby": errorId,
+      "data-error": field.error,
+      class: fieldClass,
+    };
+    return (
+      <div>
+        <label for={fieldId} class="font-bold">
+          {field.label}
+          {!field.required && (
+            <span class="text-muted font-normal"> (optional)</span>
+          )}
+        </label>
+        {field.type === "textarea" && <textarea rows="6" {...common} />}
+        {field.type === "select" && (
+          <select {...common}>
+            <option value="">Choose one</option>
+            {field.options!.map((option) => (
+              <option>{option}</option>
+            ))}
+          </select>
+        )}
+        {(field.type === "text" || field.type === "email") && (
+          <input type={field.type} {...common} />
+        )}
+        <p id={errorId} class="mt-2 text-sm text-red-300" hidden />
+      </div>
+    );
+  })}
+
+  <button
+    type="submit"
+    class="bg-accent text-ink hover:bg-accent-hover rounded-md px-7 py-4 text-lg font-bold"
+  >
+    {submitLabel}
+  </button>
+</form>
+
+<script>
+  for (const form of document.querySelectorAll<HTMLFormElement>(
+    "[data-form]",
+  )) {
+    const fields = [...form.querySelectorAll<HTMLInputElement>("[data-error]")];
+
+    function showErrors() {
+      const invalid = fields.filter((field) => !field.checkValidity());
+      for (const field of fields) {
+        const isInvalid = invalid.includes(field);
+        field.setAttribute("aria-invalid", String(isInvalid));
+        const error = document.getElementById(
+          field.getAttribute("aria-describedby")!,
+        )!;
+        error.textContent = isInvalid ? field.dataset.error! : "";
+        error.hidden = !isInvalid;
+      }
+      return invalid;
+    }
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const invalid = showErrors();
+      if (invalid.length > 0) invalid[0].focus();
+    });
+  }
+</script>

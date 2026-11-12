@@ -23,6 +23,12 @@ export const pages = {
     description:
       "A safe, honest way to help your athlete get recruited. Prices on the page, parent-linked accounts, verified recruiters and no scholarship promises.",
   },
+  contact: {
+    path: "contact/",
+    title: "Contact | Athlete Index",
+    description:
+      "Questions about Athlete Index, your account or recruiter access? Send us a message and a real person on our team will get back to you.",
+  },
   pricing: {
     path: "pricing/",
     title: "Pricing | Athlete Index",
@@ -415,6 +421,76 @@ export const parentsPage = {
           "Yes. Most college roster spots are outside Division I. Athlete Index is built to help athletes find the right fit at every level.",
       },
     ],
+  },
+};
+
+export type FormField = {
+  name: string;
+  label: string;
+  type: "text" | "email" | "select" | "textarea";
+  autocomplete?: string;
+  options?: string[];
+  required: boolean;
+  error: string;
+};
+
+export const formMessages = {
+  sending: "Sending…",
+  success: "Thanks! Your message is on its way. We'll reply by email.",
+  failure:
+    "Something went wrong and your message wasn't sent. Please try again, or email us instead.",
+};
+
+export const contactPage = {
+  eyebrow: "Contact",
+  heading: "Talk to a real person",
+  intro:
+    "Questions about your account, billing or recruiter access? Send a message and we'll reply by email within [SUPPORT RESPONSE TIME].",
+  emailLabel: "Prefer email?",
+  email: "[CONTACT EMAIL]",
+  form: {
+    id: "contact-form",
+    label: "Contact us",
+    submitLabel: "Send message",
+    fields: [
+      {
+        name: "name",
+        label: "Name",
+        type: "text",
+        autocomplete: "name",
+        required: true,
+        error: "Enter your name.",
+      },
+      {
+        name: "email",
+        label: "Email",
+        type: "email",
+        autocomplete: "email",
+        required: true,
+        error: "Enter an email address like name@example.com.",
+      },
+      {
+        name: "role",
+        label: "I am a…",
+        type: "select",
+        options: [
+          "Athlete",
+          "Parent or guardian",
+          "Coach or trainer",
+          "College recruiter",
+          "Other",
+        ],
+        required: false,
+        error: "",
+      },
+      {
+        name: "message",
+        label: "Message",
+        type: "textarea",
+        required: true,
+        error: "Write a short message.",
+      },
+    ] as FormField[],
   },
 };
 

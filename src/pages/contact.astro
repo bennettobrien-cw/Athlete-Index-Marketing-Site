@@ -1,0 +1,26 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Form from "../components/Form.astro";
+import { config } from "../config";
+import { contactPage, pages } from "../content/site";
+---
+
+<BaseLayout {...pages.contact}>
+  <main class="mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1fr_1.2fr] lg:py-24">
+    <div>
+      <p class="text-accent text-sm font-bold tracking-widest uppercase">
+        {contactPage.eyebrow}
+      </p>
+      <h1 class="mt-4 text-4xl leading-[0.95] sm:text-6xl">
+        {contactPage.heading}
+      </h1>
+      <p class="text-muted mt-6 text-lg">{contactPage.intro}</p>
+      <p class="mt-8 font-bold">{contactPage.emailLabel}</p>
+      <p class="text-muted">{contactPage.email}</p>
+    </div>
+
+    <div class="border-line bg-surface rounded-2xl border p-6 sm:p-8">
+      <Form {...contactPage.form} endpoint={config.forms.contact} />
+    </div>
+  </main>
+</BaseLayout>
