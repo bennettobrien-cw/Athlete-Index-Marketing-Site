@@ -30,3 +30,24 @@ test("header links home, to each audience page, to log in and to the trial", asy
     header.getByRole("link", { name: "Start free trial" }),
   ).toHaveAttribute("href", config.signupUrl);
 });
+
+test("on a phone the nav opens from a menu button and closes with Escape", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 375, height: 800 });
+  await page.goto("./");
+  const menuButton = page.getByRole("button", { name: "Menu" });
+  const mobileNav = page.getByRole("navigation", { name: "Mobile" });
+
+  await expect(menuButton).toHaveAttribute("aria-expanded", "false");
+  await expect(mobileNav).toBeHidden();
+
+  await menuButton.click();
+  await expect(menuButton).toHaveAttribute("aria-expanded", "true");
+  await expect(mobileNav.getByRole("link", { name: "Pricing" })).toBeVisible();
+  await expect(mobileNav.getByRole("link", { name: "Log in" })).toBeVisible();
+
+  await page.keyboard.press("Escape");
+  await expect(mobileNav).toBeHidden();
+  await expect(menuButton).toBeFocused();
+});

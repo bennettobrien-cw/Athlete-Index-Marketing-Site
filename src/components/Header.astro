@@ -45,6 +45,56 @@ const base = import.meta.env.BASE_URL;
       >
         {cta.primary}
       </a>
+      <button
+        type="button"
+        aria-expanded="false"
+        aria-controls="mobile-nav"
+        class="border-line rounded-md border px-3 py-2 text-sm font-medium md:hidden"
+        data-menu-button
+      >
+        Menu
+      </button>
     </div>
   </div>
+
+  <nav
+    id="mobile-nav"
+    aria-label="Mobile"
+    class="border-line border-t px-4 pb-4 md:hidden"
+    hidden
+  >
+    <ul class="flex flex-col text-base font-medium">
+      {[...nav, { label: "Log in", href: config.appUrl }].map((item) => (
+        <li>
+          <a
+            href={"href" in item ? item.href : `${base}${item.path}`}
+            class="hover:text-accent block py-3"
+          >
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
 </header>
+
+<script>
+  const button =
+    document.querySelector<HTMLButtonElement>("[data-menu-button]")!;
+  const menu = document.getElementById("mobile-nav")!;
+
+  function setOpen(open: boolean) {
+    button.setAttribute("aria-expanded", String(open));
+    menu.hidden = !open;
+  }
+
+  button.addEventListener("click", () =>
+    setOpen(button.getAttribute("aria-expanded") !== "true"),
+  );
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !menu.hidden) {
+      setOpen(false);
+      button.focus();
+    }
+  });
+</script>
