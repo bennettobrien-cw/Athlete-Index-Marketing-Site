@@ -1,10 +1,11 @@
 import { test, expect, type APIRequestContext } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
+import { draftLegalPaths } from "../src/content/legal";
 
 const wcag22aa = ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"];
 const breakpoints = [375, 768, 1280, 1920];
 
-async function everyPagePath(request: APIRequestContext, baseURL: string) {
+async function indexedPaths(request: APIRequestContext, baseURL: string) {
   const index = await (await request.get("sitemap-index.xml")).text();
   const sitemapUrl = index.match(/<loc>(.+?)<\/loc>/)![1];
   const sitemap = await (
@@ -14,7 +15,15 @@ async function everyPagePath(request: APIRequestContext, baseURL: string) {
     ([, loc]) => new URL(loc).pathname,
   );
   expect(paths).toContain(new URL(baseURL).pathname);
-  return [...paths, "no-such-page/"];
+  return paths;
+}
+
+async function everyPagePath(request: APIRequestContext, baseURL: string) {
+  return [
+    ...(await indexedPaths(request, baseURL)),
+    ...draftLegalPaths,
+    "no-such-page/",
+  ];
 }
 
 test("every page meets WCAG 2.2 AA", async ({ page, request, baseURL }) => {
@@ -40,9 +49,7 @@ test("every indexed page has its own title, description, canonical URL and one h
 }) => {
   const titles = new Set<string>();
   const descriptions = new Set<string>();
-  const indexed = (await everyPagePath(request, baseURL!)).filter(
-    (path) => path !== "no-such-page/",
-  );
+  const indexed = await indexedPaths(request, baseURL!);
 
   for (const path of indexed) {
     await page.goto(path);
