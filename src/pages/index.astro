@@ -1,0 +1,37 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { hero, pages, product } from "../content/site";
+import { config } from "../config";
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      name: product.name,
+      url: config.siteUrl,
+      logo: new URL("logo.svg", config.siteUrl).href,
+    },
+    { "@type": "WebSite", name: product.name, url: config.siteUrl },
+    {
+      "@type": "SoftwareApplication",
+      name: product.name,
+      url: config.appUrl,
+      applicationCategory: "SportsApplication",
+      operatingSystem: "Web",
+      description: product.summary,
+    },
+  ],
+};
+---
+
+<BaseLayout {...pages.home}>
+  <script
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify(structuredData)}
+  />
+  <main>
+    <h1>{hero.headline}</h1>
+  </main>
+</BaseLayout>

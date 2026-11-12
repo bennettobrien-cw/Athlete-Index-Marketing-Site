@@ -1,0 +1,20 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { cta, pages } from "../content/site";
+import { config } from "../config";
+
+const { heading, body, homeLabel, ...meta } = pages.notFound;
+---
+
+<BaseLayout {...meta}>
+  <main>
+    <h1>{heading}</h1>
+    <p>{body}</p>
+    <a href={import.meta.env.BASE_URL} data-testid="not-found-home">
+      {homeLabel}
+    </a>
+    <a href={config.signupUrl} data-testid="not-found-signup">
+      {cta.primary}
+    </a>
+  </main>
+</BaseLayout>

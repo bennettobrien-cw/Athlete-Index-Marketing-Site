@@ -1,0 +1,36 @@
+{
+  "name": "athlete-index-marketing-site",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "format": "prettier --write .",
+    "lint": "prettier --check .",
+    "test:e2e": "playwright test",
+    "lighthouse": "bash scripts/lighthouse.sh",
+    "og-image": "playwright screenshot --viewport-size \"1200, 630\" --wait-for-timeout 500 \"file://$PWD/scripts/og-image.html\" public/og.png"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "3.7.4",
+    "@fontsource-variable/archivo": "5.3.0",
+    "@fontsource-variable/space-grotesk": "5.3.0",
+    "@tailwindcss/vite": "4.3.5",
+    "astro": "7.4.11",
+    "tailwindcss": "4.3.5"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.12",
+    "@axe-core/playwright": "4.14.0",
+    "@lhci/cli": "0.16.1",
+    "@playwright/test": "1.65.0",
+    "prettier": "3.10.0",
+    "prettier-plugin-astro": "1.1.2",
+    "typescript": "6.0.3"
+  }
+}

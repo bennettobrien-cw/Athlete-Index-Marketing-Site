@@ -1,0 +1,34 @@
+@import "tailwindcss";
+@import "@fontsource-variable/archivo/wdth-italic.css";
+@import "@fontsource-variable/space-grotesk/index.css";
+
+@theme {
+  --color-ink: #0e0e10;
+  --color-surface: #17171b;
+  --color-line: #2a2a31;
+  --color-muted: #a1a1aa;
+  --color-accent: #ff6a1f;
+  --color-accent-hover: #ff8a4c;
+  --color-paper: #f4f1ec;
+  --color-accent-deep: #c2410c;
+
+  --font-display: "Archivo Variable", "Arial Narrow", Impact, sans-serif;
+  --font-sans: "Space Grotesk Variable", system-ui, sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-ink font-sans text-white antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-display font-black uppercase italic;
+    font-stretch: 118%;
+  }
+
+  :focus-visible {
+    @apply outline-accent outline-3 outline-offset-3;
+  }
+}
