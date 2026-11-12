@@ -78,3 +78,33 @@ test("home page describes the organization, website and app as JSON-LD", async (
     applicationCategory: "SportsApplication",
   });
 });
+
+test("home FAQ structured data matches the questions on the page", async ({
+  page,
+}) => {
+  await page.goto("./");
+
+  const blocks = await page
+    .locator('script[type="application/ld+json"]')
+    .allTextContents();
+  const faqPage = blocks
+    .flatMap((text) => JSON.parse(text)["@graph"] ?? [])
+    .find((node) => node["@type"] === "FAQPage");
+  const structured = faqPage.mainEntity.map(
+    (entry: { name: string; acceptedAnswer: { text: string } }) => [
+      entry.name,
+      entry.acceptedAnswer.text,
+    ],
+  );
+
+  const visible = await page
+    .getByTestId("faq-item")
+    .evaluateAll((items) =>
+      items.map((item) => [
+        item.querySelector("summary")!.firstChild!.textContent!.trim(),
+        item.querySelector("[data-testid=faq-answer]")!.textContent!.trim(),
+      ]),
+    );
+  expect(visible).toHaveLength(6);
+  expect(structured).toEqual(visible);
+});

@@ -30,6 +30,14 @@ const structuredData = {
       operatingSystem: "Web",
       description: product.summary,
     },
+    {
+      "@type": "FAQPage",
+      mainEntity: homeFaq.items.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: { "@type": "Answer", text: item.answer },
+      })),
+    },
   ],
 };
 ---
