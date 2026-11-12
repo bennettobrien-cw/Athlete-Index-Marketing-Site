@@ -23,3 +23,21 @@ test("pricing page has its own title, description and canonical URL", async ({
   const sitemap = await (await request.get("sitemap-0.xml")).text();
   expect(sitemap).toContain(`<loc>${pricingUrl}</loc>`);
 });
+
+test("billing switch shows the athlete plan's monthly or annual price, without JavaScript", async ({
+  browser,
+}) => {
+  const page = await browser.newPage({ javaScriptEnabled: false });
+  await page.goto("pricing/");
+  const athlete = page.getByTestId("plan-athlete");
+  const billing = page.getByRole("radiogroup", { name: "Billing" });
+
+  await expect(billing.getByRole("radio", { name: /Monthly/ })).toBeChecked();
+  await expect(athlete.getByTestId("price-monthly")).toBeVisible();
+  await expect(athlete.getByTestId("price-annual")).toBeHidden();
+
+  await billing.getByText(/Annual/).click();
+  await expect(athlete.getByTestId("price-annual")).toBeVisible();
+  await expect(athlete.getByTestId("price-monthly")).toBeHidden();
+  await page.close();
+});

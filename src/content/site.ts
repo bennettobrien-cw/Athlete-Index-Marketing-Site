@@ -45,6 +45,7 @@ export const plans = [
     audience: "For athletes and their families",
     price: pricing.athleteMonthly,
     period: "/mo",
+    annual: { price: pricing.athleteAnnual, period: "/yr" },
     alternative: `or ${pricing.athleteAnnual}/yr billed annually`,
     features: [
       "Full profile with measurables",
@@ -83,6 +84,10 @@ export const pricingPage = {
   heading: "Prices on the page. No sales calls.",
   intro:
     "Start free. If Athlete Index isn't for you, cancel online in one click before the trial ends and you won't be charged.",
+  billing: [
+    { id: "monthly", label: "Monthly" },
+    { id: "annual", label: "Annual" },
+  ],
 };
 
 export const pricingPreview = {
