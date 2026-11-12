@@ -39,21 +39,6 @@ test("on a phone the nav opens from a menu button and closes with Escape", async
   const menuButton = page.getByRole("button", { name: "Menu" });
   const mobileNav = page.getByRole("navigation", { name: "Mobile" });
 
-  const headerCta = page
-    .getByRole("banner")
-    .getByRole("link", { name: "Start free trial" });
-  const ctaLineHeight = await headerCta.evaluate((el) =>
-    parseFloat(getComputedStyle(el).lineHeight),
-  );
-  const ctaPadding = await headerCta.evaluate(
-    (el) =>
-      parseFloat(getComputedStyle(el).paddingTop) +
-      parseFloat(getComputedStyle(el).paddingBottom),
-  );
-  expect((await headerCta.boundingBox())!.height).toBe(
-    ctaLineHeight + ctaPadding,
-  );
-
   await expect(menuButton).toHaveAttribute("aria-expanded", "false");
   await expect(mobileNav).toBeHidden();
 
@@ -65,6 +50,41 @@ test("on a phone the nav opens from a menu button and closes with Escape", async
   await page.keyboard.press("Escape");
   await expect(mobileNav).toBeHidden();
   await expect(menuButton).toBeFocused();
+});
+
+test("no header item wraps onto a second line at any width", async ({
+  page,
+}) => {
+  await page.goto("./");
+
+  for (const width of [375, 768, 1280]) {
+    await page.setViewportSize({ width, height: 800 });
+    const wrapped = await page
+      .getByTestId("header-bar")
+      .locator("a, button")
+      .evaluateAll((items) =>
+        items
+          .filter((item) => {
+            const walker = document.createTreeWalker(
+              item,
+              NodeFilter.SHOW_TEXT,
+            );
+            while (walker.nextNode()) {
+              const text = document.createRange();
+              text.selectNodeContents(walker.currentNode);
+              const lineTops = new Set(
+                [...text.getClientRects()]
+                  .filter((rect) => rect.width > 0)
+                  .map((rect) => Math.round(rect.top)),
+              );
+              if (lineTops.size > 1) return true;
+            }
+            return false;
+          })
+          .map((item) => item.textContent!.trim()),
+      );
+    expect(wrapped, `at ${width}px`).toEqual([]);
+  }
 });
 
 test("footer links to every page, the legal drafts and says we are not the NCAA", async ({
