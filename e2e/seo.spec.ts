@@ -41,3 +41,27 @@ test("home page has Open Graph and Twitter card tags", async ({
   expect(response.status()).toBe(200);
   expect(response.headers()["content-type"]).toBe("image/png");
 });
+
+test("home page describes the organization, website and app as JSON-LD", async ({
+  page,
+}) => {
+  await page.goto("./");
+
+  const blocks = await page
+    .locator('script[type="application/ld+json"]')
+    .allTextContents();
+  const graph = blocks.flatMap((text) => JSON.parse(text)["@graph"] ?? []);
+  const byType = (type: string) => graph.find((node) => node["@type"] === type);
+
+  expect(byType("Organization")).toMatchObject({
+    name: "Athlete Index",
+    url: config.siteUrl,
+    logo: expect.stringMatching(/^https:\/\//),
+  });
+  expect(byType("WebSite")).toMatchObject({ url: config.siteUrl });
+  expect(byType("SoftwareApplication")).toMatchObject({
+    name: "Athlete Index",
+    url: config.appUrl,
+    applicationCategory: "SportsApplication",
+  });
+});

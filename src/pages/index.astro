@@ -1,6 +1,34 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { pages } from "../content/site";
+import { pages, product } from "../content/site";
+import { config } from "../config";
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      name: product.name,
+      url: config.siteUrl,
+      logo: new URL("logo.svg", config.siteUrl).href,
+    },
+    { "@type": "WebSite", name: product.name, url: config.siteUrl },
+    {
+      "@type": "SoftwareApplication",
+      name: product.name,
+      url: config.appUrl,
+      applicationCategory: "SportsApplication",
+      operatingSystem: "Web",
+      description: product.summary,
+    },
+  ],
+};
 ---
 
-<BaseLayout {...pages.home} />
+<BaseLayout {...pages.home}>
+  <script
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify(structuredData)}
+  />
+</BaseLayout>

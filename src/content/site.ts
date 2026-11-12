@@ -1,3 +1,9 @@
+export const product = {
+  name: "Athlete Index",
+  summary:
+    "Athlete Index is where athletes build a recruiting profile with measurables, verified results and highlight film, and where college recruiters search for talent.",
+};
+
 export const pages = {
   home: {
     path: "",
