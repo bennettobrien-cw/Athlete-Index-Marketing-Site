@@ -97,3 +97,32 @@ const format = (value: number, decimals: number) => value.toFixed(decimals);
     </div>
   </div>
 </figure>
+
+<script>
+  const durationMs = 1400;
+  const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);
+
+  function runStopwatch(counter: HTMLElement) {
+    const target = Number(counter.dataset.countTo);
+    const decimals = Number(counter.dataset.decimals);
+    const start = performance.now();
+
+    function tick(now: number) {
+      const progress = Math.min((now - start) / durationMs, 1);
+      counter.textContent = (target * easeOut(progress)).toFixed(decimals);
+      if (progress < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      if (!entry.isIntersecting) continue;
+      observer.unobserve(entry.target);
+      runStopwatch(entry.target as HTMLElement);
+    }
+  });
+  document
+    .querySelectorAll<HTMLElement>("[data-count-to]")
+    .forEach((counter) => observer.observe(counter));
+</script>
