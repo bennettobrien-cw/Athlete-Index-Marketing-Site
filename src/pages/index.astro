@@ -9,6 +9,7 @@ import Safety from "../components/Safety.astro";
 import Testimonials from "../components/Testimonials.astro";
 import PricingPreview from "../components/PricingPreview.astro";
 import Faq from "../components/Faq.astro";
+import FinalCta from "../components/FinalCta.astro";
 import { homeFaq, pages, product } from "../content/site";
 import { config } from "../config";
 
@@ -58,5 +59,6 @@ const structuredData = {
     <Testimonials />
     <PricingPreview />
     <Faq id="faq" {...homeFaq} />
+    <FinalCta />
   </main>
 </BaseLayout>

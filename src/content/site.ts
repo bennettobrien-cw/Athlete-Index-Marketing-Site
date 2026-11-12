@@ -350,6 +350,11 @@ export const homeFaq = {
   ],
 };
 
+export const finalCta = {
+  heading: "Your next PR could be the one a coach sees.",
+  body: "Build your profile tonight. Post your first result tomorrow.",
+};
+
 export const sampleProfile = {
   label: "Sample athlete profile",
   badge: "Sample profile",
