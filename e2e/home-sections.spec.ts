@@ -54,3 +54,26 @@ test("audience tabs show one tailored panel at a time, each with its own CTA", a
     if (cta) await expect(panelCta).toHaveAttribute("data-cta", cta);
   }
 });
+
+test("audience tabs follow the keyboard: arrows wrap, Home and End jump", async ({
+  page,
+}) => {
+  await page.goto("./");
+  const tab = (name: string) =>
+    page.getByRole("tablist", { name: "Who it's for" }).getByRole("tab", {
+      name,
+    });
+
+  await tab("Athletes").focus();
+  for (const [key, expected] of [
+    ["ArrowRight", "Parents"],
+    ["End", "Recruiters"],
+    ["ArrowRight", "Athletes"],
+    ["ArrowLeft", "Recruiters"],
+    ["Home", "Athletes"],
+  ]) {
+    await page.keyboard.press(key);
+    await expect(tab(expected)).toBeFocused();
+    await expect(tab(expected)).toHaveAttribute("aria-selected", "true");
+  }
+});
