@@ -1,0 +1,32 @@
+---
+import PlanCard from "./PlanCard.astro";
+import { plans, pricingPreview } from "../content/site";
+
+const base = import.meta.env.BASE_URL;
+---
+
+<section
+  aria-labelledby="pricing-preview-heading"
+  class="border-line bg-surface/40 border-y"
+>
+  <div class="mx-auto max-w-5xl px-4 py-20 sm:px-6 lg:py-28">
+    <h2 id="pricing-preview-heading" class="text-4xl sm:text-5xl">
+      {pricingPreview.heading}
+    </h2>
+    <p class="text-muted mt-4 text-lg">{pricingPreview.intro}</p>
+
+    <div class="mt-12 grid gap-6 md:grid-cols-2">
+      {plans.map((plan) => (
+        <PlanCard plan={plan} />
+      ))}
+    </div>
+
+    <a
+      href={`${base}pricing/`}
+      data-testid="pricing-link"
+      class="text-accent mt-10 inline-flex items-center gap-2 py-2 text-lg font-bold hover:underline"
+    >
+      {pricingPreview.linkLabel} <span aria-hidden="true">→</span>
+    </a>
+  </div>
+</section>

@@ -28,3 +28,29 @@ test("testimonials are clearly marked placeholders until real ones exist", async
     await expect(card).toHaveAttribute("data-placeholder", "true");
   }
 });
+
+test("pricing preview shows both plans, the trial terms and links to full pricing", async ({
+  page,
+}) => {
+  await page.goto("./");
+  const pricing = page.getByRole("region", { name: "Simple, honest pricing" });
+
+  const athlete = pricing.getByTestId("plan-athlete");
+  await expect(athlete.getByTestId("plan-cta")).toHaveAttribute(
+    "href",
+    config.signupUrl,
+  );
+  await expect(athlete.getByTestId("plan-cta")).toHaveAttribute(
+    "data-cta",
+    "pricing-athlete",
+  );
+  await expect(athlete.getByTestId("trial-terms")).toBeVisible();
+
+  await expect(
+    pricing.getByTestId("plan-recruiter").getByTestId("plan-cta"),
+  ).toHaveAttribute("href", new URL("recruiters/", config.siteUrl).pathname);
+  await expect(pricing.getByTestId("pricing-link")).toHaveAttribute(
+    "href",
+    new URL("pricing/", config.siteUrl).pathname,
+  );
+});

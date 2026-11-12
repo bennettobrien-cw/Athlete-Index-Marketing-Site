@@ -26,9 +26,57 @@ export const pages = {
 export const pricing = {
   trialLength: "[TRIAL LENGTH]",
   athleteMonthly: "[PRICE]",
+  athleteAnnual: "[PRICE]",
+  recruiterMonthly: "[PRICE]",
 };
 
 export const trialTerms = `${pricing.trialLength} free, then ${pricing.athleteMonthly}/mo. Cancel anytime in one click.`;
+
+export const plans = [
+  {
+    id: "athlete",
+    name: "Athlete",
+    audience: "For athletes and their families",
+    price: pricing.athleteMonthly,
+    period: "/mo",
+    alternative: `or ${pricing.athleteAnnual}/yr billed annually`,
+    features: [
+      "Full profile with measurables",
+      "Unlimited results and updates",
+      "Highlight video uploads",
+      "Search teams, recruiters and events",
+      "AI Assistant",
+      "Parent-linked account",
+    ],
+    cta: { label: "Start free trial", to: "signup" },
+    terms: trialTerms,
+    featured: true,
+  },
+  {
+    id: "recruiter",
+    name: "Recruiter",
+    audience: "For college coaches and scouts",
+    price: pricing.recruiterMonthly,
+    period: "/mo",
+    alternative: "Team and department plans on request",
+    features: [
+      "Search by sport, class, position and numbers",
+      "Verified and coach-confirmed results",
+      "Highlight film on every profile",
+      "Saved searches and shortlists",
+      "Verified recruiter badge",
+    ],
+    cta: { label: "Request recruiter access", to: "recruiters/" },
+    terms: "We verify every recruiter before access is turned on.",
+    featured: false,
+  },
+];
+
+export const pricingPreview = {
+  heading: "Simple, honest pricing",
+  intro: "Two plans. Prices on the page. No sales calls, ever.",
+  linkLabel: "Compare plans and read the pricing FAQ",
+};
 
 export const hero = {
   eyebrow: "Football · Basketball · Baseball & Softball",
