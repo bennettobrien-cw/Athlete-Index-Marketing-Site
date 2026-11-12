@@ -11,6 +11,12 @@ export const pages = {
     description:
       "Put your game where recruiters look. Your measurables, PRs and highlight film in one athlete profile college coaches can search. Start a free trial.",
   },
+  pricing: {
+    path: "pricing/",
+    title: "Pricing | Athlete Index",
+    description:
+      "Athlete Index pricing for athletes, families and recruiters. Start with a free trial, see every price on the page, and cancel online in one click.",
+  },
   notFound: {
     path: "404/",
     title: "Page not found | Athlete Index",
@@ -71,6 +77,13 @@ export const plans = [
     featured: false,
   },
 ];
+
+export const pricingPage = {
+  eyebrow: "Pricing",
+  heading: "Prices on the page. No sales calls.",
+  intro:
+    "Start free. If Athlete Index isn't for you, cancel online in one click before the trial ends and you won't be charged.",
+};
 
 export const pricingPreview = {
   heading: "Simple, honest pricing",
