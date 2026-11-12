@@ -1,0 +1,39 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { draftBanner, type LegalDocument } from "../content/legal";
+
+interface Props {
+  document: LegalDocument;
+}
+
+const { document } = Astro.props;
+---
+
+<BaseLayout
+  title={document.title}
+  description={document.description}
+  path={document.path}
+  noindex
+>
+  <main class="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:py-24">
+    <div
+      data-testid="legal-draft-banner"
+      class="bg-paper text-ink border-accent-deep rounded-xl border-l-8 p-5"
+    >
+      <p class="font-bold">{draftBanner.title}</p>
+      <p class="mt-1">{draftBanner.body}</p>
+    </div>
+
+    <h1 class="mt-10 text-4xl sm:text-6xl">{document.heading}</h1>
+    <p class="text-muted mt-3">Effective {document.updated}</p>
+
+    {document.sections.map((section) => (
+      <section class="mt-10">
+        <h2 class="text-2xl sm:text-3xl">{section.heading}</h2>
+        {section.paragraphs.map((paragraph) => (
+          <p class="mt-4 text-lg text-white/85">{paragraph}</p>
+        ))}
+      </section>
+    ))}
+  </main>
+</BaseLayout>

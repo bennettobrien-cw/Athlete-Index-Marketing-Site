@@ -23,6 +23,12 @@ export const pages = {
     description:
       "A safe, honest way to help your athlete get recruited. Prices on the page, parent-linked accounts, verified recruiters and no scholarship promises.",
   },
+  about: {
+    path: "about/",
+    title: "About | Athlete Index",
+    description:
+      "Athlete Index exists to put every athlete's performance in front of the people who can change their career, with honest prices and honest results.",
+  },
   contact: {
     path: "contact/",
     title: "Contact | Athlete Index",
@@ -597,6 +603,42 @@ export const recruitersPage = {
         error: "Choose your division.",
       },
     ] as FormField[],
+  },
+};
+
+export const aboutPage = {
+  eyebrow: "About",
+  heading: "Every athlete deserves to be seen",
+  mission:
+    "Talent is everywhere. Exposure isn't. Athlete Index puts every athlete's performance, all in one place, in front of the people who can change their career, whether that's at D1, D2, D3, NAIA or JUCO.",
+  principles: {
+    heading: "What we stand for",
+    items: [
+      {
+        title: "Prices on the page",
+        body: "No sales calls, no hidden fees, no pressure. Cancel in one click.",
+      },
+      {
+        title: "Honest numbers",
+        body: "We label every result verified or self-reported, and we never invent stats about ourselves either.",
+      },
+      {
+        title: "No promises we can't keep",
+        body: "Nobody can guarantee a scholarship. We help coaches find you and trust what they see.",
+      },
+      {
+        title: "Kids first",
+        body: "Most of our athletes are minors. Parents stay in the loop, and athlete data is never for sale.",
+      },
+      {
+        title: "Every level counts",
+        body: "Most college athletes play outside Division I. We're built for all of them.",
+      },
+    ],
+  },
+  team: {
+    heading: "Who we are",
+    body: "[TEAM: founders, background and why you started Athlete Index.]",
   },
 };
 
