@@ -13,7 +13,8 @@
     "format": "prettier --write .",
     "lint": "prettier --check .",
     "test:e2e": "playwright test",
-    "lighthouse": "lhci autorun"
+    "lighthouse": "lhci autorun",
+    "og-image": "playwright screenshot --viewport-size \"1200, 630\" --wait-for-timeout 500 \"file://$PWD/scripts/og-image.html\" public/og.png"
   },
   "dependencies": {
     "@astrojs/sitemap": "3.7.4",

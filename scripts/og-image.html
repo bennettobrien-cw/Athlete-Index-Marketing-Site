@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Athlete Index share image</title>
+    <link
+      rel="stylesheet"
+      href="../node_modules/@fontsource-variable/archivo/wdth-italic.css"
+    />
+    <link
+      rel="stylesheet"
+      href="../node_modules/@fontsource-variable/space-grotesk/index.css"
+    />
+    <style>
+      body {
+        margin: 0;
+        width: 1200px;
+        height: 630px;
+        background: #0e0e10;
+        color: #fff;
+        font-family: "Space Grotesk Variable", sans-serif;
+        display: flex;
+        align-items: center;
+        gap: 64px;
+        padding: 0 88px;
+        box-sizing: border-box;
+        overflow: hidden;
+        position: relative;
+      }
+      body::after {
+        content: "";
+        position: absolute;
+        right: -120px;
+        top: 0;
+        width: 420px;
+        height: 100%;
+        background: #ff6a1f;
+        transform: skewX(-14deg);
+      }
+      .mark {
+        width: 260px;
+        height: 260px;
+        flex-shrink: 0;
+        color: #fff;
+        --hl: #ff6a1f;
+      }
+      h1 {
+        font-family: "Archivo Variable", sans-serif;
+        font-style: italic;
+        font-weight: 900;
+        font-stretch: 118%;
+        text-transform: uppercase;
+        font-size: 84px;
+        line-height: 0.95;
+        margin: 0 0 24px;
+      }
+      h1 span {
+        color: #ff6a1f;
+      }
+      p {
+        font-size: 34px;
+        margin: 0;
+        color: #c4c4cc;
+        max-width: 560px;
+      }
+    </style>
+  </head>
+  <body>
+    <svg class="mark" viewBox="0 0 100 100" aria-hidden="true">
+      <circle
+        cx="50"
+        cy="57"
+        r="35"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="9"
+      />
+      <rect x="40" y="4" width="20" height="9" rx="2" fill="currentColor" />
+      <rect x="46" y="11" width="8" height="9" fill="currentColor" />
+      <rect
+        x="78"
+        y="17"
+        width="9"
+        height="13"
+        rx="2"
+        transform="rotate(45 82.5 23.5)"
+        fill="currentColor"
+      />
+      <polygon
+        points="56,30 38,60 50,60 43,84 64,52 52,52 60,30"
+        fill="var(--hl)"
+      />
+    </svg>
+    <div>
+      <h1>Athlete <span>Index</span></h1>
+      <p>Get seen. Get recruited.</p>
+    </div>
+  </body>
+</html>
