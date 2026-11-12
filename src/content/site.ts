@@ -11,6 +11,12 @@ export const pages = {
     description:
       "Put your game where recruiters look. Your measurables, PRs and highlight film in one athlete profile college coaches can search. Start a free trial.",
   },
+  features: {
+    path: "features/",
+    title: "Features | Athlete Index",
+    description:
+      "Athlete profiles with measurables, verified performance posts, highlight film, recruiter search and an AI Assistant. See how Athlete Index helps you get recruited.",
+  },
   pricing: {
     path: "pricing/",
     title: "Pricing | Athlete Index",
@@ -292,6 +298,57 @@ export const features = {
       aiLabel: "AI",
     },
   ],
+};
+
+export const featuresPage = {
+  eyebrow: "Features",
+  heading: "Everything a coach needs to see",
+  intro:
+    "Your numbers, your film and your progress in one profile, built so recruiters can find you and trust what they find.",
+  midCta: {
+    heading: "Build your profile in minutes",
+    body: "Start with what you have. Add results and film as they come.",
+  },
+  sports: {
+    heading: "Built for your sport",
+    intro:
+      "Every sport has its own numbers. Your profile shows the ones coaches in your sport filter by.",
+    items: [
+      {
+        id: "football",
+        name: "Football",
+        measurables: [
+          "40-yard dash",
+          "Pro shuttle (5-10-5)",
+          "Vertical and broad jump",
+          "Height, weight and position",
+          "Season stats",
+        ],
+      },
+      {
+        id: "basketball",
+        name: "Basketball",
+        measurables: [
+          "Height, wingspan and standing reach",
+          "Max vertical",
+          "Lane agility",
+          "Points, rebounds and assists",
+          "Shooting splits",
+        ],
+      },
+      {
+        id: "baseball-softball",
+        name: "Baseball & Softball",
+        measurables: [
+          "60-yard dash or home to first",
+          "Exit velocity",
+          "Pitch velocity",
+          "Pop time",
+          "Batting and fielding stats",
+        ],
+      },
+    ],
+  },
 };
 
 export const audiences = {
