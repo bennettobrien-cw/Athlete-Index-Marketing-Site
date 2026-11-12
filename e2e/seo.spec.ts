@@ -42,6 +42,19 @@ test("home page has Open Graph and Twitter card tags", async ({
   expect(response.headers()["content-type"]).toBe("image/png");
 });
 
+test("robots.txt points crawlers to a sitemap that lists the home page", async ({
+  request,
+}) => {
+  const robots = await (await request.get("robots.txt")).text();
+  const sitemapUrl = robots.match(/^Sitemap: (.+)$/m)?.[1];
+  expect(sitemapUrl).toBe(new URL("sitemap-index.xml", config.siteUrl).href);
+
+  const index = await (await request.get(new URL(sitemapUrl!).pathname)).text();
+  const sitemapPath = new URL(index.match(/<loc>(.+?)<\/loc>/)![1]).pathname;
+  const sitemap = await (await request.get(sitemapPath)).text();
+  expect(sitemap).toContain(`<loc>${config.siteUrl}</loc>`);
+});
+
 test("home page describes the organization, website and app as JSON-LD", async ({
   page,
 }) => {
