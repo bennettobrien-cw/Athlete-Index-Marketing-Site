@@ -33,7 +33,7 @@ test("every page meets WCAG 2.2 AA", async ({ page, request, baseURL }) => {
   }
 });
 
-test("no page scrolls sideways at any breakpoint", async ({
+test("no page scrolls sideways or cuts off content at any breakpoint", async ({
   page,
   request,
   baseURL,
@@ -48,6 +48,22 @@ test("no page scrolls sideways at any breakpoint", async ({
           document.documentElement.clientWidth,
       );
       expect(overflow, `${path} at ${width}px`).toBe(0);
+
+      const cutOff = await page.evaluate(() => {
+        const viewportWidth = document.documentElement.clientWidth;
+        return [...document.body.querySelectorAll("*")]
+          .filter((element) => !element.closest("[aria-hidden='true']"))
+          .filter((element) => element.getClientRects().length > 0)
+          .filter(
+            (element) =>
+              element.getBoundingClientRect().right > viewportWidth + 0.5,
+          )
+          .map(
+            (element) =>
+              `${element.tagName.toLowerCase()}: ${element.textContent!.trim().slice(0, 40)}`,
+          );
+      });
+      expect(cutOff, `${path} at ${width}px`).toEqual([]);
     }
   }
 });

@@ -1,0 +1,69 @@
+---
+import ProfileMock from "./ProfileMock.astro";
+import { config } from "../config";
+import { cta, hero, trialTerms } from "../content/site";
+
+const base = import.meta.env.BASE_URL;
+---
+
+<section data-testid="hero" class="relative overflow-hidden">
+  <div
+    aria-hidden="true"
+    class="bg-accent/10 absolute inset-y-0 -right-40 hidden w-[42rem] -skew-x-12 lg:block"
+  ></div>
+
+  <div class="relative mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 px-4 pt-16 pb-12 sm:px-6 lg:grid-cols-[1.1fr_1fr] lg:pt-24">
+    <div>
+      <p class="text-accent text-sm font-bold tracking-widest uppercase">
+        {hero.eyebrow}
+      </p>
+      <h1 class="mt-4 text-4xl leading-[0.95] sm:text-7xl xl:text-8xl">
+        {hero.headline}
+      </h1>
+      <p
+        data-testid="hero-subhead"
+        class="mt-6 max-w-xl text-lg text-white/85 sm:text-xl"
+      >
+        {hero.subhead}
+      </p>
+
+      <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+        <a
+          href={config.signupUrl}
+          data-cta="hero"
+          class="bg-accent text-ink hover:bg-accent-hover rounded-md px-7 py-4 text-center text-lg font-bold"
+        >
+          {cta.primary}
+        </a>
+        <a
+          href="#how-it-works"
+          class="border-line rounded-md border px-7 py-4 text-center text-lg font-bold hover:border-white"
+        >
+          {hero.secondaryCta}
+        </a>
+      </div>
+      <p data-testid="trial-terms" class="text-muted mt-4 text-sm">
+        {trialTerms}
+      </p>
+    </div>
+
+    <ProfileMock />
+  </div>
+
+  <div class="relative mx-auto max-w-7xl px-4 pb-12 sm:px-6">
+    <a
+      href={`${base}recruiters/`}
+      data-testid="recruiter-strip"
+      class="border-line bg-surface hover:border-accent group flex flex-wrap items-center gap-x-3 gap-y-1 rounded-lg border px-5 py-4"
+    >
+      <span class="text-accent font-bold">{hero.recruiterStrip.lead}</span>
+      <span>{hero.recruiterStrip.text}</span>
+      <span
+        aria-hidden="true"
+        class="ml-auto transition-transform group-hover:translate-x-1"
+      >
+        →
+      </span>
+    </a>
+  </div>
+</section>

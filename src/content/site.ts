@@ -23,8 +23,109 @@ export const pages = {
   },
 };
 
+export const pricing = {
+  trialLength: "[TRIAL LENGTH]",
+  athleteMonthly: "[PRICE]",
+};
+
+export const trialTerms = `${pricing.trialLength} free, then ${pricing.athleteMonthly}/mo. Cancel anytime in one click.`;
+
 export const hero = {
+  eyebrow: "Football · Basketball · Baseball & Softball",
   headline: "Get seen. Get recruited.",
+  subhead:
+    "Put your game where recruiters look: your measurables, PRs and film in one profile coaches can search.",
+  secondaryCta: "See how it works",
+  recruiterStrip: {
+    lead: "Recruiting?",
+    text: "Find verified athletes by class, position and numbers",
+  },
+  alternatives: {
+    headline: "Your numbers. Your film. In front of recruiters.",
+    subhead:
+      "Stop emailing stats into the void. Post your results once and let recruiters search for you.",
+  },
+};
+
+export const proof = {
+  show: true,
+  note: "Placeholder numbers. Replace with real, verifiable counts before launch.",
+  stats: [
+    {
+      value: "[STAT: athletes]",
+      label: "athletes building profiles",
+      placeholder: true,
+    },
+    {
+      value: "[STAT: results posted]",
+      label: "results posted",
+      placeholder: true,
+    },
+    {
+      value: "[STAT: recruiters]",
+      label: "verified recruiters searching",
+      placeholder: true,
+    },
+  ],
+};
+
+export const howItWorks = {
+  heading: "How it works",
+  intro: "Three steps. Most athletes finish the first one before practice.",
+  steps: [
+    {
+      title: "Build your profile",
+      body: "Add your sport, position, class and measurables. Link the film you already have.",
+    },
+    {
+      title: "Post your results",
+      body: "Share PRs, game stats and highlights as they happen. Verified results get a badge recruiters trust.",
+    },
+    {
+      title: "Get discovered",
+      body: "Recruiters search by class, position and numbers. Your profile puts you in those results.",
+    },
+  ],
+};
+
+export const sampleProfile = {
+  label: "Sample athlete profile",
+  badge: "Sample profile",
+  initials: "JE",
+  name: "Jordan Ellis",
+  details: "Wide receiver · Class of 2028 · 6'1\" · 185 lb",
+  sport: "Football",
+  results: [
+    {
+      event: "40-yard dash",
+      value: 4.48,
+      unit: "s",
+      decimals: 2,
+      verified: true,
+      source: "Laser-timed at a combine",
+    },
+    {
+      event: "Pro shuttle",
+      value: 4.12,
+      unit: "s",
+      decimals: 2,
+      verified: true,
+      source: "Confirmed by coach",
+    },
+    {
+      event: "Vertical jump",
+      value: 36.5,
+      unit: '"',
+      decimals: 1,
+      verified: false,
+      source: "Self-reported",
+    },
+  ],
+  post: {
+    kicker: "New PR",
+    text: "Dropped my 40 from 4.61 to 4.48 this spring. Film from the combine below.",
+  },
+  highlight: { title: "Junior season highlights", duration: "2:14" },
 };
 
 export const nav = [
