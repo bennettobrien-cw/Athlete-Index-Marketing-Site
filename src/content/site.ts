@@ -88,6 +88,24 @@ export const pricingPage = {
     { id: "monthly", label: "Monthly" },
     { id: "annual", label: "Annual" },
   ],
+  comparison: {
+    caption: "Compare plans",
+    columns: ["Feature", "Athlete", "Recruiter"],
+    rows: [
+      ["Profile with measurables", true, false],
+      ["Post results and updates", true, false],
+      ["Highlight video uploads", true, false],
+      ["Verified result badges", "Earn them", "Filter by them"],
+      ["Search athletes by class, position and numbers", false, true],
+      ["Search teams, recruiters and events", true, true],
+      ["AI Assistant", true, false],
+      ["Parent-linked account", true, false],
+      ["Saved searches and shortlists", false, true],
+      ["Verified recruiter badge", false, true],
+      ["Free trial", pricing.trialLength, "On request"],
+      ["Cancel online in one click", true, true],
+    ] as [string, boolean | string, boolean | string][],
+  },
 };
 
 export const pricingPreview = {

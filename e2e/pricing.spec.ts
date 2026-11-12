@@ -41,3 +41,28 @@ test("billing switch shows the athlete plan's monthly or annual price, without J
   await expect(athlete.getByTestId("price-monthly")).toBeHidden();
   await page.close();
 });
+
+test("comparison table spells out what each plan includes", async ({
+  page,
+}) => {
+  await page.goto("pricing/");
+  const table = page.getByRole("table", { name: "Compare plans" });
+
+  await expect(table.getByRole("columnheader")).toHaveText([
+    "Feature",
+    "Athlete",
+    "Recruiter",
+  ]);
+  const rows = table
+    .getByRole("row")
+    .filter({ has: page.getByRole("rowheader") });
+  expect(await rows.count()).toBeGreaterThanOrEqual(8);
+  const cellWords = await table
+    .getByRole("cell")
+    .evaluateAll((cells) =>
+      cells.map((cell) => cell.textContent!.replace(/[✓✕]/g, "").trim()),
+    );
+  expect(cellWords).not.toContain("");
+  expect(cellWords).toContain("Included");
+  expect(cellWords).toContain("Not included");
+});
