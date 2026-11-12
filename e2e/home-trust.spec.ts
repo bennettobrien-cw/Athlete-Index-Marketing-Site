@@ -54,3 +54,20 @@ test("pricing preview shows both plans, the trial terms and links to full pricin
     new URL("pricing/", config.siteUrl).pathname,
   );
 });
+
+test("FAQ answers six top objections, each opening on demand", async ({
+  page,
+}) => {
+  await page.goto("./");
+  const faq = page.getByRole("region", { name: "Questions, answered" });
+  const items = faq.getByTestId("faq-item");
+
+  await expect(items).toHaveCount(6);
+  const first = items.first();
+  const answer = first.getByTestId("faq-answer");
+  await expect(answer).toBeHidden();
+  await first.getByTestId("faq-question").click();
+  await expect(answer).toBeVisible();
+  await first.getByTestId("faq-question").click();
+  await expect(answer).toBeHidden();
+});

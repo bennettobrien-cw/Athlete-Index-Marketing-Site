@@ -8,7 +8,8 @@ import Audiences from "../components/Audiences.astro";
 import Safety from "../components/Safety.astro";
 import Testimonials from "../components/Testimonials.astro";
 import PricingPreview from "../components/PricingPreview.astro";
-import { pages, product } from "../content/site";
+import Faq from "../components/Faq.astro";
+import { homeFaq, pages, product } from "../content/site";
 import { config } from "../config";
 
 const structuredData = {
@@ -48,5 +49,6 @@ const structuredData = {
     <Safety />
     <Testimonials />
     <PricingPreview />
+    <Faq id="faq" {...homeFaq} />
   </main>
 </BaseLayout>

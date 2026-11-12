@@ -314,6 +314,42 @@ export const testimonials = {
   ],
 };
 
+export const homeFaq = {
+  heading: "Questions, answered",
+  items: [
+    {
+      question: "Is Athlete Index worth it?",
+      answer:
+        "It costs less than one showcase weekend, and your profile works for you every day of the year. Try it free first, and cancel in one click if it's not for you.",
+    },
+    {
+      question: "Do recruiters actually use it?",
+      answer:
+        "Recruiters search for athletes by sport, class, position and numbers. We're growing, and we'll share real numbers as they come in. We will never make them up.",
+    },
+    {
+      question: "How do I cancel?",
+      answer:
+        "Online, in one click, from your account settings. No phone calls and no forms.",
+    },
+    {
+      question: "Is my child's information safe?",
+      answer:
+        "Parents can link to and manage their athlete's account. Recruiters are verified before they can search, minors' profiles stay out of search engines, and we never sell athlete data. Under-13 accounts are created and managed by a parent.",
+    },
+    {
+      question: "Does Athlete Index guarantee a scholarship?",
+      answer:
+        "No. No honest service can. We help coaches find you and trust your numbers. Your play, grades and character do the rest.",
+    },
+    {
+      question: "Is this allowed under NCAA rules?",
+      answer:
+        "Athletes and families can use recruiting profiles. College coaches follow their own association's rules about when they can contact you. Athlete Index is not affiliated with or endorsed by the NCAA, NAIA or NJCAA.",
+    },
+  ],
+};
+
 export const sampleProfile = {
   label: "Sample athlete profile",
   badge: "Sample profile",
