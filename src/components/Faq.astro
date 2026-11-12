@@ -38,3 +38,20 @@ const { id, heading, items } = Astro.props;
     ))}
   </div>
 </section>
+
+<script>
+  import { track } from "../scripts/track";
+
+  for (const item of document.querySelectorAll<HTMLDetailsElement>(
+    "[data-testid=faq-item]",
+  )) {
+    item.addEventListener("toggle", () => {
+      if (!item.open) return;
+      track("faq_open", {
+        question: item
+          .querySelector("summary")!
+          .firstChild!.textContent!.trim(),
+      });
+    });
+  }
+</script>
