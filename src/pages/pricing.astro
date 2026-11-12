@@ -2,7 +2,9 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PlanCard from "../components/PlanCard.astro";
 import ComparisonTable from "../components/ComparisonTable.astro";
-import { pages, plans, pricingPage } from "../content/site";
+import TrialSteps from "../components/TrialSteps.astro";
+import Faq from "../components/Faq.astro";
+import { pages, plans, pricingFaq, pricingPage } from "../content/site";
 ---
 
 <BaseLayout {...pages.pricing}>
@@ -47,8 +49,12 @@ import { pages, plans, pricingPage } from "../content/site";
       </div>
     </section>
 
+    <TrialSteps />
+
     <section class="mx-auto max-w-5xl px-4 py-16 sm:px-6">
       <ComparisonTable />
     </section>
+
+    <Faq id="pricing-faq" {...pricingFaq} />
   </main>
 </BaseLayout>

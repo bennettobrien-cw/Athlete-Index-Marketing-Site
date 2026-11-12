@@ -1,0 +1,28 @@
+---
+import { trialSteps } from "../content/site";
+---
+
+<section
+  aria-labelledby="trial-steps-heading"
+  class="border-line bg-surface/40 border-y"
+>
+  <div class="mx-auto max-w-5xl px-4 py-16 sm:px-6">
+    <h2 id="trial-steps-heading" class="text-3xl sm:text-4xl">
+      {trialSteps.heading}
+    </h2>
+    <ol class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {trialSteps.steps.map((step, index) => (
+        <li>
+          <p class="font-display text-accent text-4xl font-black italic">
+            {index + 1}
+          </p>
+          <h3 class="mt-2 text-xl">{step.title}</h3>
+          <p class="text-muted mt-2">{step.body}</p>
+        </li>
+      ))}
+    </ol>
+    <p data-testid="auto-renew-terms" class="text-muted mt-10 text-sm">
+      {trialSteps.autoRenewTerms}
+    </p>
+  </div>
+</section>
