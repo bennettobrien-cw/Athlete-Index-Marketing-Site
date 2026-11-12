@@ -17,6 +17,12 @@ export const pages = {
     description:
       "Athlete profiles with measurables, verified performance posts, highlight film, recruiter search and an AI Assistant. See how Athlete Index helps you get recruited.",
   },
+  parents: {
+    path: "parents/",
+    title: "For Parents | Athlete Index",
+    description:
+      "A safe, honest way to help your athlete get recruited. Prices on the page, parent-linked accounts, verified recruiters and no scholarship promises.",
+  },
   pricing: {
     path: "pricing/",
     title: "Pricing | Athlete Index",
@@ -346,6 +352,67 @@ export const featuresPage = {
           "Pop time",
           "Batting and fielding stats",
         ],
+      },
+    ],
+  },
+};
+
+export const parentsPage = {
+  eyebrow: "For parents",
+  heading: "Help your athlete get seen. Safely and honestly.",
+  intro:
+    "You've spent the weekends, the gas money and the tournament fees. Here's what Athlete Index does, what it costs and what it will never do.",
+  cost: {
+    heading: "What it costs",
+    body: "Some recruiting services cost families thousands and only share the price on a sales call. Ours is on the pricing page: one plan, a free trial, and cancel online in one click.",
+    linkLabel: "See pricing",
+  },
+  odds: {
+    heading: "The honest odds",
+    intro:
+      "Most high school athletes don't play in college, and most who do play outside Division I. That's why we're built for every level: D1, D2, D3, NAIA and JUCO.",
+    caption: "Odds of playing in college, by sport",
+    columns: ["Sport", "Any NCAA division", "Division I"],
+    rows: [
+      ["Football", "8.1%", "3.4%"],
+      ["Men's basketball", "3.6%", "1.1%"],
+      ["Women's basketball", "4.7%", "1.4%"],
+      ["Baseball", "8.8%", "2.7%"],
+      ["Softball", "6.5%", "2.1%"],
+    ],
+    source: {
+      label:
+        "Source: NCAA, Estimated probability of competing in college athletics (2024-25)",
+      href: "https://www.ncaa.org/student-athletes/probability-of-competing-beyond-high-school",
+    },
+  },
+  faq: {
+    heading: "Parent questions",
+    items: [
+      {
+        question: "Who owns the account?",
+        answer:
+          "For athletes under 18, a parent or guardian is the account holder and payer. Athletes under 13 need a parent to create the account, with verified parental consent.",
+      },
+      {
+        question: "Who can contact my athlete?",
+        answer:
+          "Only verified recruiters can reach out, and a linked parent can see who has. College coaches also follow their own rules about when they can make contact.",
+      },
+      {
+        question: "Will you sell our data or show ads to my child?",
+        answer:
+          "No. We never sell athlete data, and we don't run targeted ads to minors.",
+      },
+      {
+        question: "Can we delete everything if we leave?",
+        answer:
+          "Yes. You can delete the profile and its data from account settings. [CONFIRM: deletion timeline.]",
+      },
+      {
+        question: "Is it worth it if my athlete isn't D1 material?",
+        answer:
+          "Yes. Most college roster spots are outside Division I. Athlete Index is built to help athletes find the right fit at every level.",
       },
     ],
   },
