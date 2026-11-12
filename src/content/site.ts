@@ -240,6 +240,32 @@ export const safety = {
   parentsLink: "More for parents",
 };
 
+export const testimonials = {
+  show: true,
+  heading: "What athletes say",
+  note: "Placeholder testimonials. Replace with real quotes, with written permission, before launch.",
+  items: [
+    {
+      quote: "[TESTIMONIAL: athlete quote about getting noticed]",
+      name: "[NAME]",
+      detail: "[SPORT] · Class of [YEAR]",
+      placeholder: true,
+    },
+    {
+      quote: "[TESTIMONIAL: parent quote about cost, safety or ease]",
+      name: "[NAME]",
+      detail: "Parent of a [SPORT] athlete",
+      placeholder: true,
+    },
+    {
+      quote: "[TESTIMONIAL: coach or recruiter quote about verified results]",
+      name: "[NAME]",
+      detail: "[ROLE] · [PROGRAM]",
+      placeholder: true,
+    },
+  ],
+};
+
 export const sampleProfile = {
   label: "Sample athlete profile",
   badge: "Sample profile",
