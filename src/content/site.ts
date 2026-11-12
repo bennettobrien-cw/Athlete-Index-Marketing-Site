@@ -205,6 +205,41 @@ export const audiences = {
   ],
 };
 
+export const safety = {
+  heading: "Safe for families",
+  intro:
+    "Most of our athletes are minors. We built the rules around that, not the other way round.",
+  items: [
+    {
+      title: "Prices on the page",
+      body: "No sales calls and no surprise fees. Cancel online in one click.",
+    },
+    {
+      title: "Parent-linked accounts",
+      body: "Parents can see and manage their athlete's account.",
+    },
+    {
+      title: "Verified recruiters",
+      body: "Recruiters are checked before they can search or reach out.",
+    },
+    {
+      title: "You control visibility",
+      body: "Choose who sees your profile. Minors' profiles stay out of search engines.",
+    },
+    {
+      title: "Honest results",
+      body: "Every result is labelled verified or self-reported.",
+    },
+    {
+      title: "No data sales, no guarantees",
+      body: "We never sell athlete data, and we never promise scholarships.",
+    },
+  ],
+  minAgePolicy:
+    "Under 13? A parent or guardian creates and manages the account, with verified parental consent.",
+  parentsLink: "More for parents",
+};
+
 export const sampleProfile = {
   label: "Sample athlete profile",
   badge: "Sample profile",
