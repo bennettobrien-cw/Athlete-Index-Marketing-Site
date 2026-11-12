@@ -65,3 +65,20 @@ test("a completed contact form is sent as JSON and confirmed", async ({
   });
   await expect(form.getByLabel("Name", { exact: true })).toHaveValue("");
 });
+
+test("when sending fails the visitor is told and keeps what they typed", async ({
+  page,
+}) => {
+  await page.clock.install();
+  await mockFormspree(page, 500);
+  await page.goto("contact/");
+  const form = await fillContactForm(page);
+  await page.clock.fastForward(10_000);
+
+  await form.getByRole("button", { name: "Send message" }).click();
+
+  await expect(page.getByTestId("form-status")).toHaveText(/wasn't sent/);
+  await expect(form.getByLabel("Name", { exact: true })).toHaveValue(
+    "Sam Rivera",
+  );
+});

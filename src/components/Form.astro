@@ -82,18 +82,28 @@ const fieldClass =
     const fields = [...form.querySelectorAll<HTMLInputElement>("[data-error]")];
     const status = form.querySelector<HTMLElement>("[role=status]")!;
 
+    async function post() {
+      try {
+        const response = await fetch(form.action, {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(Object.fromEntries(new FormData(form))),
+        });
+        return response.ok;
+      } catch {
+        return false;
+      }
+    }
+
     async function send() {
-      const response = await fetch(form.action, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(Object.fromEntries(new FormData(form))),
-      });
-      if (response.ok) {
+      if (await post()) {
         status.textContent = status.dataset.success!;
         form.reset();
+      } else {
+        status.textContent = status.dataset.failure!;
       }
     }
 
