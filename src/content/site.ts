@@ -26,9 +26,57 @@ export const pages = {
 export const pricing = {
   trialLength: "[TRIAL LENGTH]",
   athleteMonthly: "[PRICE]",
+  athleteAnnual: "[PRICE]",
+  recruiterMonthly: "[PRICE]",
 };
 
 export const trialTerms = `${pricing.trialLength} free, then ${pricing.athleteMonthly}/mo. Cancel anytime in one click.`;
+
+export const plans = [
+  {
+    id: "athlete",
+    name: "Athlete",
+    audience: "For athletes and their families",
+    price: pricing.athleteMonthly,
+    period: "/mo",
+    alternative: `or ${pricing.athleteAnnual}/yr billed annually`,
+    features: [
+      "Full profile with measurables",
+      "Unlimited results and updates",
+      "Highlight video uploads",
+      "Search teams, recruiters and events",
+      "AI Assistant",
+      "Parent-linked account",
+    ],
+    cta: { label: "Start free trial", to: "signup" },
+    terms: trialTerms,
+    featured: true,
+  },
+  {
+    id: "recruiter",
+    name: "Recruiter",
+    audience: "For college coaches and scouts",
+    price: pricing.recruiterMonthly,
+    period: "/mo",
+    alternative: "Team and department plans on request",
+    features: [
+      "Search by sport, class, position and numbers",
+      "Verified and coach-confirmed results",
+      "Highlight film on every profile",
+      "Saved searches and shortlists",
+      "Verified recruiter badge",
+    ],
+    cta: { label: "Request recruiter access", to: "recruiters/" },
+    terms: "We verify every recruiter before access is turned on.",
+    featured: false,
+  },
+];
+
+export const pricingPreview = {
+  heading: "Simple, honest pricing",
+  intro: "Two plans. Prices on the page. No sales calls, ever.",
+  linkLabel: "Compare plans and read the pricing FAQ",
+};
 
 export const hero = {
   eyebrow: "Football · Basketball · Baseball & Softball",
@@ -203,6 +251,108 @@ export const audiences = {
       cta: { label: "Request recruiter access", to: "recruiters/" },
     },
   ],
+};
+
+export const safety = {
+  heading: "Safe for families",
+  intro:
+    "Most of our athletes are minors. We built the rules around that, not the other way round.",
+  items: [
+    {
+      title: "Prices on the page",
+      body: "No sales calls and no surprise fees. Cancel online in one click.",
+    },
+    {
+      title: "Parent-linked accounts",
+      body: "Parents can see and manage their athlete's account.",
+    },
+    {
+      title: "Verified recruiters",
+      body: "Recruiters are checked before they can search or reach out.",
+    },
+    {
+      title: "You control visibility",
+      body: "Choose who sees your profile. Minors' profiles stay out of search engines.",
+    },
+    {
+      title: "Honest results",
+      body: "Every result is labelled verified or self-reported.",
+    },
+    {
+      title: "No data sales, no guarantees",
+      body: "We never sell athlete data, and we never promise scholarships.",
+    },
+  ],
+  minAgePolicy:
+    "Under 13? A parent or guardian creates and manages the account, with verified parental consent.",
+  parentsLink: "More for parents",
+};
+
+export const testimonials = {
+  show: true,
+  heading: "What athletes say",
+  note: "Placeholder testimonials. Replace with real quotes, with written permission, before launch.",
+  items: [
+    {
+      quote: "[TESTIMONIAL: athlete quote about getting noticed]",
+      name: "[NAME]",
+      detail: "[SPORT] · Class of [YEAR]",
+      placeholder: true,
+    },
+    {
+      quote: "[TESTIMONIAL: parent quote about cost, safety or ease]",
+      name: "[NAME]",
+      detail: "Parent of a [SPORT] athlete",
+      placeholder: true,
+    },
+    {
+      quote: "[TESTIMONIAL: coach or recruiter quote about verified results]",
+      name: "[NAME]",
+      detail: "[ROLE] · [PROGRAM]",
+      placeholder: true,
+    },
+  ],
+};
+
+export const homeFaq = {
+  heading: "Questions, answered",
+  items: [
+    {
+      question: "Is Athlete Index worth it?",
+      answer:
+        "It costs less than one showcase weekend, and your profile works for you every day of the year. Try it free first, and cancel in one click if it's not for you.",
+    },
+    {
+      question: "Do recruiters actually use it?",
+      answer:
+        "Recruiters search for athletes by sport, class, position and numbers. We're growing, and we'll share real numbers as they come in. We will never make them up.",
+    },
+    {
+      question: "How do I cancel?",
+      answer:
+        "Online, in one click, from your account settings. No phone calls and no forms.",
+    },
+    {
+      question: "Is my child's information safe?",
+      answer:
+        "Parents can link to and manage their athlete's account. Recruiters are verified before they can search, minors' profiles stay out of search engines, and we never sell athlete data. Under-13 accounts are created and managed by a parent.",
+    },
+    {
+      question: "Does Athlete Index guarantee a scholarship?",
+      answer:
+        "No. No honest service can. We help coaches find you and trust your numbers. Your play, grades and character do the rest.",
+    },
+    {
+      question: "Is this allowed under NCAA rules?",
+      answer:
+        "Athletes and families can use recruiting profiles. College coaches follow their own association's rules about when they can contact you. Athlete Index is not affiliated with or endorsed by the NCAA, NAIA or NJCAA.",
+    },
+  ],
+};
+
+export const finalCta = {
+  heading: "Your next PR could be the one a coach sees.",
+  body: "Build your profile tonight. Post your first result tomorrow.",
 };
 
 export const sampleProfile = {

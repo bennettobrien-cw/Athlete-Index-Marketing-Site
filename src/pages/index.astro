@@ -5,7 +5,12 @@ import ProofStrip from "../components/ProofStrip.astro";
 import HowItWorks from "../components/HowItWorks.astro";
 import Features from "../components/Features.astro";
 import Audiences from "../components/Audiences.astro";
-import { pages, product } from "../content/site";
+import Safety from "../components/Safety.astro";
+import Testimonials from "../components/Testimonials.astro";
+import PricingPreview from "../components/PricingPreview.astro";
+import Faq from "../components/Faq.astro";
+import FinalCta from "../components/FinalCta.astro";
+import { homeFaq, pages, product } from "../content/site";
 import { config } from "../config";
 
 const structuredData = {
@@ -26,6 +31,14 @@ const structuredData = {
       operatingSystem: "Web",
       description: product.summary,
     },
+    {
+      "@type": "FAQPage",
+      mainEntity: homeFaq.items.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: { "@type": "Answer", text: item.answer },
+      })),
+    },
   ],
 };
 ---
@@ -42,5 +55,10 @@ const structuredData = {
     <HowItWorks />
     <Features />
     <Audiences />
+    <Safety />
+    <Testimonials />
+    <PricingPreview />
+    <Faq id="faq" {...homeFaq} />
+    <FinalCta />
   </main>
 </BaseLayout>

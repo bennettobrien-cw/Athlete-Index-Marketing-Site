@@ -77,3 +77,16 @@ test("audience tabs follow the keyboard: arrows wrap, Home and End jump", async 
     await expect(tab(expected)).toHaveAttribute("aria-selected", "true");
   }
 });
+
+test("home page ends with a final call to start the trial", async ({
+  page,
+}) => {
+  await page.goto("./");
+  const band = page.getByTestId("final-cta");
+
+  await expect(band.getByRole("heading", { level: 2 })).toBeVisible();
+  const trial = band.getByRole("link", { name: "Start free trial" });
+  await expect(trial).toHaveAttribute("href", config.signupUrl);
+  await expect(trial).toHaveAttribute("data-cta", "final");
+  await expect(band.getByTestId("trial-terms")).toBeVisible();
+});

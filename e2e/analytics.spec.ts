@@ -51,3 +51,14 @@ test("switching audience tab records which audience was chosen", async ({
     .poll(() => events)
     .toContainEqual(["audience_tab", { props: { tab: "parents" } }]);
 });
+
+test("opening a FAQ question records which one", async ({ page }) => {
+  const events = await recordAnalyticsEvents(page);
+
+  await page.goto("./");
+  await page.getByTestId("faq-question").nth(2).click();
+
+  await expect
+    .poll(() => events)
+    .toContainEqual(["faq_open", { props: { question: "How do I cancel?" } }]);
+});
