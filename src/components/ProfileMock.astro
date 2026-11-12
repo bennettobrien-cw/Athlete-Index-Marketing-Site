@@ -1,0 +1,99 @@
+---
+import { sampleProfile as profile } from "../content/site";
+
+const [headline, ...otherResults] = profile.results;
+const format = (value: number, decimals: number) => value.toFixed(decimals);
+---
+
+<figure
+  aria-label={profile.label}
+  class="border-line bg-surface relative mx-auto w-full max-w-md rounded-3xl border p-5 shadow-2xl shadow-black/50"
+>
+  <span
+    data-testid="sample-badge"
+    class="bg-paper text-ink absolute -top-3 right-5 rounded-full px-3 py-1 text-xs font-bold tracking-wider uppercase"
+  >
+    {profile.badge}
+  </span>
+
+  <div class="flex items-center gap-4">
+    <div
+      aria-hidden="true"
+      class="bg-accent text-ink font-display grid h-14 w-14 shrink-0 place-items-center rounded-2xl text-xl font-black italic"
+    >
+      {profile.initials}
+    </div>
+    <div>
+      <p class="text-lg font-bold">{profile.name}</p>
+      <p class="text-muted text-sm">{profile.details}</p>
+    </div>
+  </div>
+
+  <div class="bg-ink mt-5 rounded-2xl p-5">
+    <div class="flex items-center justify-between gap-2">
+      <p class="text-muted text-sm font-medium">{headline.event}</p>
+      <span
+        data-testid="result-verified"
+        class="bg-accent/15 text-accent rounded-full px-2.5 py-0.5 text-xs font-bold"
+      >
+        ✓ Verified
+      </span>
+    </div>
+    <p
+      class="font-display mt-1 text-6xl font-black italic tabular-nums"
+      style="font-stretch: 118%"
+    >
+      <span data-count-to={headline.value} data-decimals={headline.decimals}>
+        {format(headline.value, headline.decimals)}
+      </span>
+      <span class="text-accent">{headline.unit}</span>
+    </p>
+    <p class="text-muted mt-1 text-xs">{headline.source}</p>
+  </div>
+
+  <ul class="mt-3 grid grid-cols-2 gap-3">
+    {otherResults.map((result) => (
+      <li class="bg-ink rounded-2xl p-4">
+        <p class="text-muted text-xs font-medium">{result.event}</p>
+        <p class="mt-1 text-2xl font-bold tabular-nums">
+          {format(result.value, result.decimals)}
+          {result.unit}
+        </p>
+        {result.verified ? (
+          <p
+            data-testid="result-verified"
+            class="text-accent text-xs font-bold"
+          >
+            ✓ {result.source}
+          </p>
+        ) : (
+          <p data-testid="result-self-reported" class="text-muted text-xs">
+            {result.source}
+          </p>
+        )}
+      </li>
+    ))}
+  </ul>
+
+  <div class="border-line mt-3 rounded-2xl border p-4">
+    <p class="text-accent text-xs font-bold tracking-wider uppercase">
+      {profile.post.kicker}
+    </p>
+    <p class="mt-1 text-sm">{profile.post.text}</p>
+    <div
+      data-testid="highlight-video"
+      class="from-surface to-ink relative mt-3 flex aspect-video items-end overflow-hidden rounded-xl bg-gradient-to-br p-3"
+    >
+      <div
+        aria-hidden="true"
+        class="bg-accent text-ink absolute inset-0 m-auto grid h-12 w-12 place-items-center rounded-full text-lg"
+      >
+        ▶
+      </div>
+      <p class="relative text-sm font-bold">{profile.highlight.title}</p>
+      <p class="text-muted relative ml-auto text-xs">
+        {profile.highlight.duration}
+      </p>
+    </div>
+  </div>
+</figure>

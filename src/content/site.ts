@@ -47,6 +47,46 @@ export const hero = {
   },
 };
 
+export const sampleProfile = {
+  label: "Sample athlete profile",
+  badge: "Sample profile",
+  initials: "JE",
+  name: "Jordan Ellis",
+  details: "Wide receiver · Class of 2028 · 6'1\" · 185 lb",
+  sport: "Football",
+  results: [
+    {
+      event: "40-yard dash",
+      value: 4.48,
+      unit: "s",
+      decimals: 2,
+      verified: true,
+      source: "Laser-timed at a combine",
+    },
+    {
+      event: "Pro shuttle",
+      value: 4.12,
+      unit: "s",
+      decimals: 2,
+      verified: true,
+      source: "Confirmed by coach",
+    },
+    {
+      event: "Vertical jump",
+      value: 36.5,
+      unit: '"',
+      decimals: 1,
+      verified: false,
+      source: "Self-reported",
+    },
+  ],
+  post: {
+    kicker: "New PR",
+    text: "Dropped my 40 from 4.61 to 4.48 this spring. Film from the combine below.",
+  },
+  highlight: { title: "Junior season highlights", duration: "2:14" },
+};
+
 export const nav = [
   { label: "Features", path: "features/" },
   { label: "Pricing", path: "pricing/" },

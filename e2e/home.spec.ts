@@ -25,3 +25,17 @@ test("hero leads with the headline, the trial and a way in for recruiters", asyn
     new URL("recruiters/", config.siteUrl).pathname,
   );
 });
+
+test("hero shows a sample profile with verified and self-reported results", async ({
+  page,
+}) => {
+  await page.goto("./");
+  const profile = page.getByRole("figure", { name: "Sample athlete profile" });
+
+  await expect(profile.getByTestId("sample-badge")).toBeVisible();
+  await expect(profile.getByTestId("result-verified").first()).toBeVisible();
+  await expect(
+    profile.getByTestId("result-self-reported").first(),
+  ).toBeVisible();
+  await expect(profile.getByTestId("highlight-video")).toBeVisible();
+});
