@@ -11,4 +11,18 @@ export const pages = {
     description:
       "Put your game where recruiters look. Your measurables, PRs and highlight film in one athlete profile college coaches can search. Start a free trial.",
   },
+  notFound: {
+    path: "404/",
+    title: "Page not found | Athlete Index",
+    description:
+      "This page is out of bounds. Head back to the Athlete Index home page or start your free trial and build your recruiting profile.",
+    noindex: true,
+    heading: "Out of bounds.",
+    body: "We couldn't find that page. It may have moved, or the link may be wrong.",
+    homeLabel: "Back to home",
+  },
+};
+
+export const cta = {
+  primary: "Start free trial",
 };
